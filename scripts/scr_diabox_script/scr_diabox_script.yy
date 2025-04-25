@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_diabox_script",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_diabox_script",
+  "parent":{
+    "name":"CUTSCENESCRIPTS",
+    "path":"folders/Scripts/CUTSCENESCRIPTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

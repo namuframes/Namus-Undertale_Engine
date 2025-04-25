@@ -1,0 +1,1 @@
+global.curTurn = baTURNS.playerTurnInit

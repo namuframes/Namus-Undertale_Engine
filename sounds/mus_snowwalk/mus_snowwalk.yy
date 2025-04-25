@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"mus_snowwalk",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":11.762358,
+  "name":"mus_snowwalk",
+  "parent":{
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"mus_snowwalk.ogg",
+  "type":0,
+  "volume":1.0,
+}

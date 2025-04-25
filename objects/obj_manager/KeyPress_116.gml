@@ -1,0 +1,1 @@
+debug_change_room = !debug_change_room;

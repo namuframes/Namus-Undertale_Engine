@@ -1,0 +1,1 @@
+show_message("Current fun value is "+string(global.fun_value))

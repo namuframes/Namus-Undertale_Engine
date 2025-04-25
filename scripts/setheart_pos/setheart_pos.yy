@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"setheart_pos",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"setheart_pos",
+  "parent":{
+    "name":"UI",
+    "path":"folders/Scripts/UI.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

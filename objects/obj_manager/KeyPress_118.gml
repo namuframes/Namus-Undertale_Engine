@@ -1,0 +1,1 @@
+global.fun_value = get_integer("Type in a fun value", global.fun_value)

@@ -1,0 +1,1 @@
+addtext(scr_text("test"),0)

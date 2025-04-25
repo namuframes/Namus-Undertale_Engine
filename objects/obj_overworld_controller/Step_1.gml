@@ -1,0 +1,1 @@
+if (obj_mainchar.state = mode.free) {updateOnTop()}

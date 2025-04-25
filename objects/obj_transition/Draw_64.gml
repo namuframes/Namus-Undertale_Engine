@@ -1,0 +1,9 @@
+/*
+draw_set_alpha(alpha-0.1);
+gpu_set_blendmode(bm_max)
+draw_rectangle_color(0,0,display_get_width(),display_get_height(),#000022,#000022,#000022,#000022,false)
+gpu_set_blendmode(bm_normal)
+*/
+draw_set_alpha(alpha);
+draw_rectangle_color(0,0,display_get_width(),display_get_height(),c_black,c_black,c_black,c_black,false)
+draw_set_alpha(1);

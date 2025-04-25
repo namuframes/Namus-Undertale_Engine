@@ -1,0 +1,1 @@
+var room_name = string_copy(room_get_name(room), 1, 8)

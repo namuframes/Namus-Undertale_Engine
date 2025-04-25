@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"get_textSeq",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"get_textSeq",
+  "parent":{
+    "name":"CUTSCENESCRIPTS",
+    "path":"folders/Scripts/CUTSCENESCRIPTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
