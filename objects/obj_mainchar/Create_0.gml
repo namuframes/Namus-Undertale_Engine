@@ -36,11 +36,17 @@ state = mode.free;
 
 function colision(obj)
 {
-	var _c = collision_rectangle(bbox_left-spd, bbox_top-spd, bbox_right+spd, bbox_bottom+spd, obj, false, true)
-	var allowCol = variable_instance_exists(_c,"can_colide") ? _c.can_colide : true
+	var collisions = array_create(0);
+	with(obj) {
+		if (can_colide) {
+			array_push(collisions, id);
+		}
+	}
 	
-	if (allowCol) {
-		if (place_meeting(x+hsp,y,obj))
+	for (var i = 0; i < array_length(collisions); i++)
+	{
+		var aCol = collisions[i]
+		if (place_meeting(x+hsp,y,aCol))
 		{
 			var yplus = 0;
 			while (place_meeting(x+hsp,y-yplus,obj) && yplus <= abs(1*hsp)) {yplus++;}
@@ -54,12 +60,12 @@ function colision(obj)
 			} else {y-=yplus}			
 		}
 	
-		if !place_meeting(x+hsp,y+1,obj) && vsp >= 0 && place_meeting(x+hsp,y+2+abs(hsp),obj)
+		if !place_meeting(x+hsp,y+1,aCol) && vsp >= 0 && place_meeting(x+hsp,y+2+abs(hsp),aCol)
 		{
-			while(!place_meeting(x+hsp,y+1,obj) && hsp !=0) {y += 1;}
+			while(!place_meeting(x+hsp,y+1,aCol) && hsp !=0) {y += 1;}
 		}
 	
-		if (place_meeting(x,y+vsp,obj))
+		if (place_meeting(x,y+vsp,aCol))
 		{
 			while (!place_meeting(x,y+sign(vsp),obj))
 			{
@@ -77,22 +83,23 @@ glitch_dance_sprite = false;
 
 function do_frisk_dance()
 {
-	
-	var _c = collision_rectangle(bbox_left-spd, bbox_top-spd, bbox_right+spd, bbox_bottom+spd, obj_colision, false, true)
-	var allowCol = variable_instance_exists(_c,"can_colide") ? _c.can_colide : true
+	var collisions = array_create(0);
+	with(obj_colision) { if (can_colide) {array_push(collisions, id)} }
 	
 	var pressing_buttons = (down_key and up_key)
 	if (pressing_buttons)
 	{frisk_dance = true;} else {frisk_dance = false}	
 	
-	if (frisk_dance && allowCol) {
-		if (instance_place(x,y-spd,obj_colision)) {
-			if (!glitch_dance_sprite) {		
-				face = DOWN
-				glitch_dance_sprite = true
-			} else {face = UP; glitch_dance_sprite = false}
-			vsp+=spd
+	for (var i = 0; i < array_length(collisions); i++) {
+		var aCol = collisions[i]
+		if (frisk_dance) {
+			if (instance_place(x,y-spd,aCol)) {
+				if (!glitch_dance_sprite) {		
+					face = DOWN
+					glitch_dance_sprite = true
+				} else {face = UP; glitch_dance_sprite = false}
+				vsp+=spd
+			}
 		}
 	}
-
 }
