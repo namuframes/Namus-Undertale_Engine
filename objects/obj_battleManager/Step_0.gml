@@ -1,5 +1,18 @@
 if (live_call()) {return live_result}
 scr_inputs();
+
+if (keyboard_check(ord("Q"))) {
+	var direc = point_direction(obj_battleBox.x,obj_battleBox.y, mouse_x, mouse_y)
+	obj_battleBox.image_angle = round(direc);
+}
+
+
+
+if (keyboard_check(ord("I"))) {obj_battleBox.y -= 3}
+if (keyboard_check(ord("K"))) {obj_battleBox.y += 3}
+if (keyboard_check(ord("J"))) {obj_battleBox.x -= 3}
+if (keyboard_check(ord("L"))) {obj_battleBox.x += 3}
+
 switch(global.curTurn)
 {
 	case baTURNS.playerTurnInit:
@@ -50,7 +63,7 @@ switch(global.curTurn)
 	case baTURNS.enemieTurnInit:
 		var box = obj_battleBox;
 		instance_create_depth(box.x, box.y, box.depth-1, obj_soul)
-		instance_create_layer(0,0, layer, obj_bullet_pattern)
+		//instance_create_layer(0,0, layer, obj_bullet_pattern)
 		global.curTurn = baTURNS.enemieTurn
 	break;
 	

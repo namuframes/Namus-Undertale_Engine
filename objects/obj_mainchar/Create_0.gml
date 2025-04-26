@@ -38,8 +38,10 @@ function colision(obj)
 {
 	var collisions = array_create(0);
 	with(obj) {
-		if (can_colide) {
-			array_push(collisions, id);
+		if (variable_instance_exists(id, "can_colide")) {
+			if (can_colide) {
+				array_push(collisions, id);
+			}
 		}
 	}
 	

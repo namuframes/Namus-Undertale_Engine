@@ -64,4 +64,8 @@ function next_turn()
 	global.curTurn = baTURNS.enemieTurnInit		
 }
 
+if (!instance_exists(obj_boxLimit)) {
+	instance_create_layer(x,y, layer, obj_boxLimit)	
+}
+
 heartpos = array_create(3)

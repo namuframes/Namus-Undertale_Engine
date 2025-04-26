@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_ui_box",
-    "path":"sprites/spr_ui_box/spr_ui_box.yy",
+    "name":"spr_battle_box",
+    "path":"sprites/spr_battle_box/spr_battle_box.yy",
   },
   "spriteMaskId":null,
   "visible":true,
