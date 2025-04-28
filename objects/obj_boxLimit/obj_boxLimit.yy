@@ -34,5 +34,5 @@
     "path":"sprites/spr_boxLimit/spr_boxLimit.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

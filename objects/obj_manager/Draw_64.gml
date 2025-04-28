@@ -1,4 +1,4 @@
-if (global.debug)
+if (global.debug  && room != rm_battle)
 {
 	draw_set_font(fnt_main);
 	draw_set_alpha(0.5)

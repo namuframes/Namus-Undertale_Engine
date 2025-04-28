@@ -19,11 +19,9 @@ switch(global.curTurn)
 			case baPAGES.MAIN:
 				input = (right_key_p-left_key_p)
 				limitArray = mainButtons
-				var texttodraw = "* I want your bootie cheeks\n-Diddy"
-				if (textMain = 0) {textMain = new typewriter(fnt_main, font_get_size(fnt_main)+4, 5, 32, noone, texttodraw, 1)}
-				textMain.step();
-				textMain.draw(box.bbox_left+20, box.bbox_top+20);
+				
 			break;
+			
 			case baPAGES.MERCY:
 				input = (down_key_p-up_key_p);
 				var options = ["Spare", "Flee"];
@@ -42,9 +40,34 @@ switch(global.curTurn)
 				}
 			break;
 	
-			case baPAGES.ACT:
-				get_enemie_list()
+			case baPAGES.ACT_choose:
+				get_enemie_list(baPAGES.ACT_action)
 			break;
+			
+			case baPAGES.ACT_action:
+				input = (down_key_p-up_key_p);
+				limitArray = choosenEnemie.acts;
+				for (var i = 0; i < array_length(choosenEnemie.acts); i++)
+				{
+					var myPos = [box.bbox_left+70, box.bbox_top+20+35*i]
+					if (i > 1)	{
+						myPos[1] -= 35*2	
+						myPos[0] += 230
+					}
+					
+					if (selectedOption == i) {
+						setheart_pos(myPos[0]-30, myPos[1]+15);
+						if (accept_key_p) {
+							textMain = 0;
+							global.curTurn = baTURNS.cutscene;	
+						};
+					}
+					
+					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+choosenEnemie.acts[i], 2, 2);
+				}
+				
+			break;
+			
 	
 			case baPAGES.ITEM:
 				input = (down_key_p-up_key_p);
@@ -52,16 +75,17 @@ switch(global.curTurn)
 				for (var i = 0; i < array_length(global.inventory); i++)
 				{
 					var myPos = [box.bbox_left+70, box.bbox_top+20+35*i]
+					var itemName = global.inventory[i].name
+					
 					if (i > 1)	{
 						myPos[1] -= 35*2	
 						myPos[0] += 230
 					}
+					
 					if (selectedOption == i) {
 						setheart_pos(myPos[0]-30, myPos[1]+15);
 					}
-
-			
-					var itemName = global.inventory[i].name
+					
 					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+itemName, 2, 2);
 					if (global.debug) {
 						draw_text(myPos[0]+string_width(itemName)*2+40, myPos[1], myPos[1])
@@ -80,6 +104,13 @@ switch(global.curTurn)
 		}
 
 		draw_sprite(spr_soul, 0, heartpos[0], heartpos[1]);
+	break;
+	
+	case baTURNS.cutscene:
+		if (!instance_exists(obj_dialogueHandler)) {
+			instance_create_depth(0,0,0,obj_dialogueHandler);	
+			create_box("test!")
+		}
 	break;
 }
 
@@ -101,12 +132,40 @@ switch(global.curTurn)
 #endregion
 
 if (global.debug)	{
-	draw_text(10, 10, "Interaction Cooldown - "+string(global.interact_cooldown));
-	draw_text(10, 25, "Choosen enemie - "+string(choosenEnemie));
-	draw_text(10, 40, "Choosen enemie Index - "+string(choosenEnemieIndex));
-	draw_text(10, 55, "Previous page - "+string(prevPage));
-	draw_text(10, 70, "Current page - "+string(page));
-	draw_text(10, 85, "Battle Time - "+string(battletime));
-	draw_text(450, 10, "Selected Option - "+string(selectedOption));
+	draw_set_font(fnt_main);
+	var _debugText = [
+		"Selected Option | "+string(selectedOption),
+		"Interaction Cooldown | "+string(global.interact_cooldown),
+		//"Choosen enemie | "+string(choosenEnemie.name),
+		"Choosen enemie Index | "+string(choosenEnemieIndex),
+		"Previous page | "+string(prevPage),
+		"Current page | "+string(page),
+		"Battle Time | "+string(battletime),
+		"saved Menu Pos | "+string(savedMenuPos)
+	]
+	for (var i = 0; i < array_length(_debugText); i++) {
+		draw_set_color(c_red)
+		draw_text(0, 0+(20*i), _debugText[i])	
+		draw_set_color(c_white)
+	}
+	draw_set_font(-1);
 }
 draw_set_color(c_white)
+
+//Drawing the enemies
+for (var i = 0; i < array_length(enemie); i++) {
+	var ene = enemie[i];
+	var pos = [100+((sprite_get_width(ene.sprite)*6)*i), 200-sprite_get_height(ene.sprite)];
+	
+	switch(ene.name) {
+		case "Test":
+			enemie_set_offset(0,-20,0)
+		break;
+		
+		default:
+			enemie_set_offset(0,0,0)
+		break;
+	}
+	
+	draw_sprite_ext(ene.sprite, 0, pos[0]+eneOffset[0], pos[1]+eneOffset[1], 1.5+eneOffset[2], 1.5+eneOffset[2], 0, c_white, 1);
+}

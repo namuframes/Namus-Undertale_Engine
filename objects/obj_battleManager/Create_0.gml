@@ -3,28 +3,30 @@ enum baTURNS {
 	playerTurnInit,
 	playerTurn,
 	enemieTurnInit,
-	enemieTurn
+	enemieTurn,
+	cutscene
 }
 
 enum baPAGES {
 	MAIN,
 	FIGHT,
-	ACT,
+	ACT_choose,
+	ACT_action,
 	ITEM,
 	MERCY
 }
 
 global.curTurn = baTURNS.playerTurnInit;
-textMain = 0;
 input = 0;
 textsize = 2;
 mainButtons = ["fight","act","item","mercy"];
 selectedOption = 0;
+savedMenuPos = [0];
 curOption_index = 0;
 limitArray = mainButtons;
 page = baPAGES.MAIN;
-prevPage = baPAGES.MAIN
-enemie = ["Grifo Aquatico", "Pano", "Nossa"];
+prevPage = array_create(0)
+enemie = [get_enemie("Dilo"), get_enemie("Test")];
 choosenEnemie = 0;
 choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 battletime = 0;
@@ -34,6 +36,8 @@ function go_to_page(_page, _index=0)
 	if (accept_key_p && global.interact_cooldown <= 0)
 	{
 		audio_play_sound(sfx_confirm, 0, 0);
+		array_push(prevPage, page); //Adding current page in prevPage Array
+		array_push(savedMenuPos, selectedOption)
 		page = _page;
 		selectedOption = _index;
 		global.interact_cooldown = 4;
@@ -51,10 +55,9 @@ function get_enemie_list(_page=baPAGES.MAIN)
 		if (selectedOption == i) {
 			setheart_pos(myPos[0]-30, myPos[1]+15);
 			choosenEnemie = enemie[i]
-			go_to_page(_page, curOption_index);
+			go_to_page(_page);
 		}
-		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i], textsize, textsize)	
-
+		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i].name, textsize, textsize)	
 	}
 	choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 }
@@ -64,8 +67,19 @@ function next_turn()
 	global.curTurn = baTURNS.enemieTurnInit		
 }
 
+eneOffset = [0,0,0]
+
+function enemie_set_offset(_x, _y, _scale) {
+	eneOffset[0] = _x;
+	eneOffset[1] = _y;
+	eneOffset[2] = _scale;
+}
+
 if (!instance_exists(obj_boxLimit)) {
 	instance_create_layer(x,y, layer, obj_boxLimit)	
 }
 
 heartpos = array_create(3)
+
+
+cutscene_texts =  [0]

@@ -15,9 +15,17 @@ if (keyboard_check(ord("L"))) {obj_battleBox.x += 3}
 
 switch(global.curTurn)
 {
+	
+	case baTURNS.cutscene:
+		
+	break;
+	
+	
 	case baTURNS.playerTurnInit:
-		selectedOption = curOption_index;
+		depth = obj_battleBox.depth-1
+		selectedOption = savedMenuPos[array_length(savedMenuPos)-1];
 		page = baPAGES.MAIN;
+		array_delete(prevPage, 0, array_length(prevPage))
 		choosenEnemie = 0;
 		textMain = 0;
 		battletime = 0;
@@ -27,24 +35,24 @@ switch(global.curTurn)
 	break;
 	
 	case baTURNS.playerTurn:
-		selectedOption += input
-		if (input !=0 && selectedOption >= 0 && selectedOption <= array_length(limitArray)-1)
-		{
-			audio_play_sound(sfx_select, 0, false)
+		with(obj_battleBox) {
+			image_xscale = lerp(image_xscale,DefaultSize[0], 0.2);
+			image_yscale = lerp(image_yscale,DefaultSize[1], 0.2);
 		}
+		selectedOption += input
+		if (input !=0 && selectedOption >= 0 && selectedOption <= array_length(limitArray)-1) {audio_play_sound(sfx_select, 0, false)}
 		selectedOption = clamp(selectedOption, 0, array_length(limitArray)-1)
 
 		if (accept_key_p && page == baPAGES.MAIN)
 		{
 			curOption = mainButtons[selectedOption]
 			audio_play_sound(sfx_confirm, 0, false)
-			curOption_index = array_get_index(mainButtons, curOption)
-			prevPage = page
+			savedMenuPos[0] = selectedOption
+			array_push(prevPage, page); //Adding current page in prevPage Array
 			selectedOption = 0
-			switch(curOption)
-			{
+			switch(curOption) {
 				case "mercy": page = baPAGES.MERCY break;	
-				case "act": page = baPAGES.ACT; selectedOption = choosenEnemieIndex break;	
+				case "act": page = baPAGES.ACT_choose; selectedOption = choosenEnemieIndex break;	
 				case "item": page = baPAGES.ITEM break;	
 				case "fight": page = baPAGES.FIGHT; selectedOption = choosenEnemieIndex break;	
 			}
@@ -53,8 +61,10 @@ switch(global.curTurn)
 
 		if (cancel_key_p && page != baPAGES.MAIN)
 		{
-			page = prevPage
-			selectedOption = curOption_index
+			page = prevPage[array_length(prevPage)-1] //Changing the page to the most recent one in the prevPage array
+			selectedOption = savedMenuPos[array_length(savedMenuPos)-1];
+			array_delete(prevPage, array_length(prevPage)-1, 1)
+			array_delete(savedMenuPos, array_length(savedMenuPos)-1, 1)
 		}
 
 		if (global.interact_cooldown > 0 && page != baPAGES.MAIN) {global.interact_cooldown--;}
@@ -62,8 +72,9 @@ switch(global.curTurn)
 	
 	case baTURNS.enemieTurnInit:
 		var box = obj_battleBox;
+		depth = box.depth+1
 		instance_create_depth(box.x, box.y, box.depth-1, obj_soul)
-		//instance_create_layer(0,0, layer, obj_bullet_pattern)
+		instance_create_depth(0,0, box.depth-1, obj_bullet_pattern)
 		global.curTurn = baTURNS.enemieTurn
 	break;
 	
