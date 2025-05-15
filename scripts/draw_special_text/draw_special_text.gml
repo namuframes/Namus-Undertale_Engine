@@ -43,8 +43,9 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 		}
 
 		var _coswave = cos((global.time*6)-i)*(3+wave_range)
-		var final_x = _x+(_space*char_spacing)+(random_range(-shake_range, shake_range)*mod_shake)
-		var final_y = _y+(line_spacing*2.25)*_line+(_coswave*mod_wave)+(random_range(-shake_range, shake_range)*mod_shake)
+		var let_space = [char_spacing*_xscale/2,(line_spacing*_yscale/2)*2.25]
+		var final_x = _x+(_space*let_space[0])+(random_range(-shake_range, shake_range)*mod_shake)
+		var final_y = _y+(let_space[1])*_line+(_coswave*mod_wave)+(random_range(-shake_range, shake_range)*mod_shake)
 
 		if (_outline > 0)	{ //Drawing the outline in a specfic surface
 			for (var j = 0; j < _outline+1; j++) { //Outline
