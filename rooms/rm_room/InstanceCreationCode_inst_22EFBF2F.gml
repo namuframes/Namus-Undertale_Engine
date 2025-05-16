@@ -1,1 +1,1 @@
-addtext(scr_text("test"),0)
+scr_text("test",true, true)

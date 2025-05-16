@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"LANGUAGE_SCRIPTS",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"LANGUAGE_SCRIPTS",
+  "parent":{
+    "name":"MISC",
+    "path":"folders/Scripts/MISC.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

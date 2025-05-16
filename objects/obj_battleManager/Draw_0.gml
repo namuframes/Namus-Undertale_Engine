@@ -19,7 +19,15 @@ switch(global.curTurn)
 			case baPAGES.MAIN:
 				input = (right_key_p-left_key_p)
 				limitArray = mainButtons
-				
+				//Wiriting main text!
+				if (!is_struct(textMainHandler.wiriter)) {textMainHandler.wiriter = new typewriter(fnt_main, font_get_size(fnt_main)+4, 15, 32, noone, maintext, 1)}
+				if (instance_exists(obj_battleBox)) { //If battle box exists, set my position on it
+					textMainHandler.posx = obj_battleBox.bbox_left+20;
+					textMainHandler.posy = obj_battleBox.bbox_top+20;
+				}
+	
+				textMainHandler.wiriter.step();
+				textMainHandler.wiriter.draw(textMainHandler.posx, textMainHandler.posy);
 			break;
 			
 			case baPAGES.MERCY:
@@ -63,7 +71,7 @@ switch(global.curTurn)
 						};
 					}
 					
-					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+choosenEnemie.acts[i], 2, 2);
+					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+choosenEnemie.acts[i][0], 2, 2);
 				}
 				
 			break;
@@ -107,13 +115,19 @@ switch(global.curTurn)
 	break;
 	
 	case baTURNS.cutscene:
-		if (!instance_exists(obj_dialogueHandler)) {
-			instance_create_depth(0,0,0,obj_dialogueHandler);	
-			create_box("test!")
+		if (DoDialogueBox) {
+			create_box(choosenEnemie.acts[selectedOption][1])
+			DoDialogueBox = false;
+		}
+		if (!instance_exists(oDialogueBox)) {
+			next_turn();
+			DoDialogueBox = true;
 		}
 	break;
 }
-
+if (instance_exists(oDialogueBox)) {
+	show_debug_message(oDialogueBox.texttodraw)
+}
 #region Hud main
 	var health_x = 275;
 	var health_y = 400;
@@ -151,21 +165,3 @@ if (global.debug)	{
 	draw_set_font(-1);
 }
 draw_set_color(c_white)
-
-//Drawing the enemies
-for (var i = 0; i < array_length(enemie); i++) {
-	var ene = enemie[i];
-	var pos = [100+((sprite_get_width(ene.sprite)*6)*i), 200-sprite_get_height(ene.sprite)];
-	
-	switch(ene.name) {
-		case "Test":
-			enemie_set_offset(0,-20,0)
-		break;
-		
-		default:
-			enemie_set_offset(0,0,0)
-		break;
-	}
-	
-	draw_sprite_ext(ene.sprite, 0, pos[0]+eneOffset[0], pos[1]+eneOffset[1], 1.5+eneOffset[2], 1.5+eneOffset[2], 0, c_white, 1);
-}

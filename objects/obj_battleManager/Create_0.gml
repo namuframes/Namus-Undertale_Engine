@@ -26,7 +26,14 @@ curOption_index = 0;
 limitArray = mainButtons;
 page = baPAGES.MAIN;
 prevPage = array_create(0)
-enemie = [get_enemie("Dilo"), get_enemie("Test")];
+
+
+enemie = [
+	instance_create_layer(0,0, layer, parEnemie),
+	instance_create_layer(0,0, layer, obj_dilo)
+];
+
+
 choosenEnemie = 0;
 choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 battletime = 0;
@@ -81,5 +88,12 @@ if (!instance_exists(obj_boxLimit)) {
 
 heartpos = array_create(3)
 
+//Texts variable
+maintext = "* Main text 1"
+textMainHandler = {
+	wiriter:0,
+	posx :0,
+	posy :0
+};
 
-cutscene_texts =  [0]
+DoDialogueBox = true;

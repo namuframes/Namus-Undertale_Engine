@@ -1,19 +1,20 @@
 {
   "$GMObject":"",
-  "%Name":"obj_dialogueHandler",
+  "%Name":"obj_dilo",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_dialogueHandler",
+  "name":"obj_dilo",
   "overriddenProperties":[],
   "parent":{
-    "name":"BATTLE",
-    "path":"folders/Objects/BATTLE.yy",
+    "name":"ENEMIES",
+    "path":"folders/Objects/BATTLE/ENEMIES.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"parEnemie",
+    "path":"objects/parEnemie/parEnemie.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_dilo",
+    "path":"sprites/spr_dilo/spr_dilo.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

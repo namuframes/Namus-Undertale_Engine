@@ -11,4 +11,3 @@ _inst.image_yscale = image_yscale-1.2;
 _inst.image_angle = image_angle;
 */
 DefaultSize = [image_xscale, image_yscale];
-textMain = 0;
