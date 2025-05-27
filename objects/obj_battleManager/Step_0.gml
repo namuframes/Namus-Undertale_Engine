@@ -82,3 +82,5 @@ switch(global.curTurn)
 		battletime++;
 	break;
 }
+
+

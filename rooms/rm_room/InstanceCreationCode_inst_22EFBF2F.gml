@@ -1,1 +1,3 @@
-scr_text("test",true, true)
+language_addseq("test",0)
+addquestion("Test1")
+addquestion("Test2")

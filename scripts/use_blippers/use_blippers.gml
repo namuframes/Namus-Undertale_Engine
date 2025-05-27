@@ -10,6 +10,7 @@ function use_blippers(command){
 		case "c_white": draw_set_color(c_white) break;
 		case "c_blue": draw_set_color(c_blue) break;
 		case "c_purple": draw_set_color(#a200ff) break;
+		case "c_defualt": draw_set_color(TEXTconfig.color) break;
 		case "wave": mod_wave = 1 break;
 		case "shake": 
 			mod_shake = 1 
@@ -20,6 +21,7 @@ function use_blippers(command){
 		break;
 		case "&" :
 			break_line();
+			_space++;
 		break;
 		//----------------------------------------------
 		case "face":

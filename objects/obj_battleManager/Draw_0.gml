@@ -34,18 +34,32 @@ switch(global.curTurn)
 				input = (down_key_p-up_key_p);
 				var options = ["Spare", "Flee"];
 				limitArray = options
+				
+				if (accept_key_p && global.interact_cooldown <= 0)
+				{
+					if (options[selectedOption]	 == "Spare") 
+					{
+						for(var i=0; i < array_length(enemie); i++) {
+							if (enemie[i].can_spare) {
+								enemie[i].spared = true;
+								array_delete(enemie, i, 1)
+							}
+						}
+						next_turn()
+					};
+				}
+				
 				for (var i = 0; i < array_length(options); i++)
 				{
 					var myPos = [box.bbox_left+70, box.bbox_top+20+35*i]
 					if (selectedOption == i) {
 						setheart_pos(myPos[0]-30, myPos[1]+15);
 					}
-					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+options[i], 2, 2);	
+					var _yel = ""
+					for (var j = 0; j < array_length(enemie); j++) {if (enemie[j].can_spare && i == 0) {_yel="{c_yellow}"} } //Yellow SPARE!
+					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, _yel+"* "+options[i], 2, 2);	
 				}
-				if (accept_key_p && global.interact_cooldown <= 0)
-				{
-					if (options[selectedOption]	 == "Spare") {next_turn()}
-				}
+
 			break;
 	
 			case baPAGES.ACT_choose:
@@ -67,11 +81,12 @@ switch(global.curTurn)
 						setheart_pos(myPos[0]-30, myPos[1]+15);
 						if (accept_key_p) {
 							textMain = 0;
+							choosen_action = choosenEnemie.acts[selectedOption];
 							global.curTurn = baTURNS.cutscene;	
 						};
 					}
 					
-					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+choosenEnemie.acts[i][0], 2, 2);
+					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+choosenEnemie.acts[i], 2, 2);
 				}
 				
 			break;
@@ -115,19 +130,22 @@ switch(global.curTurn)
 	break;
 	
 	case baTURNS.cutscene:
-		if (DoDialogueBox) {
-			create_box(choosenEnemie.acts[selectedOption][1])
-			DoDialogueBox = false;
+	
+		if (DoBatCutscene) {
+			cutsceneInstance = instance_create_depth(0,0,0,obj_cutscene);
+			DoBatCutscene = false;
 		}
-		if (!instance_exists(oDialogueBox)) {
+		
+		with(choosenEnemie) {event_user(0)}
+
+		if (!instance_exists(cutsceneInstance)) {
 			next_turn();
-			DoDialogueBox = true;
+			cutsceneInstance = 0;
+			DoBatCutscene = true;
 		}
 	break;
 }
-if (instance_exists(oDialogueBox)) {
-	show_debug_message(oDialogueBox.texttodraw)
-}
+
 #region Hud main
 	var health_x = 275;
 	var health_y = 400;

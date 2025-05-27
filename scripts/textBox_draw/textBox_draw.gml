@@ -1,9 +1,9 @@
 // Os recursos de script mudaram para a v2.3.0; veja
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 para obter mais informações
 function textBox_draw(_____x,_____y){
-	var __y = _____y
-	var text_x = _____x+25;
-	var text_y = __y+20;
+	__y = _____y
+	text_x = _____x+25;
+	text_y = __y+20;
 
 	portrait_offset();
 	set_character();

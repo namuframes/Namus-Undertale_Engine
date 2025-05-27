@@ -3,8 +3,6 @@ event_inherited();
 
 page = 0;
 
-//msg[0] = array_create(0)
-
 intBox[0] = interactBox_x;
 intBox[1] = interactBox_y;
 intBox[2] = interactBox_x2;

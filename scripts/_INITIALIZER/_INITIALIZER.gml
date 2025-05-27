@@ -1,5 +1,6 @@
 enum TEXTconfig {
-	color = #FFFFFF
+	color = #FFFFFF,
+	color2 = #FFEC00
 }
 
 

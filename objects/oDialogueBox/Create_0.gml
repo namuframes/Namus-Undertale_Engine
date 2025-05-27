@@ -4,6 +4,7 @@ _y = 320;
 global.canmove = false;
 box_alpha = 1;
 
+finished_wiriting = false;
 
 dialogue = 0
 font = fnt_main
@@ -49,6 +50,7 @@ function set_character(_blip=sndTxt1, _font=fnt_main)
 
 texttodraw = array_create(0);
 text = noone;
+lines = 1;
 curmsg = 0;
 
 next_message = function()
@@ -66,5 +68,11 @@ next_message = function()
 	}
 }
 
+
+
 setshit = true;
 passTimer = false;
+
+question = array_create(0);
+questioner_instance = noone;
+in_question = false;

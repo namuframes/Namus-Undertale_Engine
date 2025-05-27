@@ -21,6 +21,9 @@ if (variable_instance_exists(id, "msg"))	{
 				if (accept_key_p && global.interact_cooldown <= 0)
 				{
 					box_instance = create_box(msg[page])
+					if (variable_instance_exists(id, "question")) {
+						box_instance.question = question;
+					}
 					global.interact_cooldown = 4;
 					changepage = true
 				}
@@ -32,6 +35,7 @@ if (variable_instance_exists(id, "msg"))	{
 				changepage = false;
 		}
 	}
+		
 }
 
 

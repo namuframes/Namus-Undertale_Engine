@@ -1,5 +1,6 @@
-draw_self();
+
 if (live_call()) {return live_result};
+draw_self();
 if (global.debug)
 {
 	var debug_texts = ["X: "+string(x), "Y: "+string(y), "Dance: "+string(frisk_dance)]
@@ -15,6 +16,5 @@ if (global.debug)
 	draw_set_font(-1)
 	
 };
-
 
 //draw_rectangle(bbox_left-spd, bbox_top-spd, bbox_right+spd, bbox_bottom+spd, false)

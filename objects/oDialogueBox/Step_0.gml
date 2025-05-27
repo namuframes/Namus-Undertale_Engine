@@ -5,7 +5,7 @@ if (setshit = true && text = noone)	{
 	dialogue = noone
 	setshit = false;
 }
-
+in_question = array_length(question) > 0 && curmsg >= array_length(texttodraw)-1
 if (is_struct(dialogue))	{
 	dialogue.blip = blip_sound;
 	dialogue.font = font;
@@ -15,6 +15,7 @@ if (is_struct(dialogue))	{
 	dialogue.text = wrap_formatted_text(text, dialogue.line_length);
 
 	var _portrait = asset_get_index(portrait)
+	
 	if (asset_get_type(_portrait) == asset_sprite) {
 		portTimeDef = sprite_get_speed(_portrait)
 		if (portTime > 0) {portTime -= portTimeDef/2} else {
@@ -33,18 +34,21 @@ if (is_struct(dialogue))	{
 		}
 	}
 
-	if (accept_key_p)	{
+	finished_wiriting = dialogue.shown_chars >= dialogue.text_length;
+
+	if (accept_key_p && !in_question)	{
 		if (dialogue.shown_chars >= string_length(text) && dialogue.can_pass)	{
 			next_message()
 		}
 	}
+
 	
 	if (keyboard_check(vk_control) && dialogue.can_skip) {//Automatic skip
 		dialogue.shown_chars = dialogue.text_length;
 		dialogue.shown_text = dialogue.text;
 		skip_timer--;
 		
-		if (dialogue.shown_chars >= dialogue.text_length && skip_timer <= 0) {
+		if (dialogue.shown_chars >= dialogue.text_length && skip_timer <= 0 && !in_question) {
 			next_message();
 			skip_timer = 2;
 		}

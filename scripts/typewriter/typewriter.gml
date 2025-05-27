@@ -127,6 +127,6 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 	
 	// Draws the currently shown characters.
 	static draw = function(_x, _y) {
-			draw_special_text(_x, _y, char_spacing, line_spacing,font, shown_text, 2, 2, 0);
+		draw_special_text(_x, _y, char_spacing, line_spacing,font, shown_text, 2, 2, 0);
 	}
 }

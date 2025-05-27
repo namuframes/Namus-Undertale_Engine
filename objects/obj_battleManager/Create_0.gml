@@ -29,14 +29,27 @@ prevPage = array_create(0)
 
 
 enemie = [
-	instance_create_layer(0,0, layer, parEnemie),
+	instance_create_layer(0,0, layer, obj_dilo),
+	instance_create_layer(0,0, layer, obj_dilo),
 	instance_create_layer(0,0, layer, obj_dilo)
 ];
+
+
+for(var i = 0; i < array_length(enemie); i++) {
+	with(enemie[i]) {
+		var w = sprite_width
+
+		x = 30+(w+20*image_xscale)*i
+		y = sprite_height/1.3
+	}
+}
 
 
 choosenEnemie = 0;
 choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 battletime = 0;
+
+choosen_action = "";
 
 function go_to_page(_page, _index=0)
 {
@@ -64,7 +77,8 @@ function get_enemie_list(_page=baPAGES.MAIN)
 			choosenEnemie = enemie[i]
 			go_to_page(_page);
 		}
-		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i].name, textsize, textsize)	
+		var _color = enemie[i].can_spare ? TEXTconfig.color2 : TEXTconfig.color
+		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i].name, textsize, textsize, 0, _color)	
 	}
 	choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 }
@@ -96,4 +110,6 @@ textMainHandler = {
 	posy :0
 };
 
-DoDialogueBox = true;
+DoBatCutscene = true;
+cutsceneInstance = 0;
+cutsceneScript = scr_test_cutscene

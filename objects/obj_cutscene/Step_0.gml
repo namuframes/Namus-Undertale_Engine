@@ -1,1 +1,3 @@
-script_execute_alt(cur_scene[0],cur_scene_array);
+if (script_exists(cutscene)) {
+	script_execute(cutscene);	
+}
