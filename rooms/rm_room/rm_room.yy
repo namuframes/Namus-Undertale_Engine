@@ -18,6 +18,7 @@
     {"name":"inst_70121461","path":"rooms/rm_room/rm_room.yy",},
     {"name":"inst_22EFBF2F","path":"rooms/rm_room/rm_room.yy",},
     {"name":"inst_55524AAE","path":"rooms/rm_room/rm_room.yy",},
+    {"name":"inst_5165C03","path":"rooms/rm_room/rm_room.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -40,6 +41,7 @@
         {"$GMRInstance":"v2","%Name":"inst_55524AAE","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_55524AAE","objectId":{"name":"par_npc","path":"objects/par_npc/par_npc.yy",},"properties":[
             {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"obj_colision","path":"objects/obj_colision/obj_colision.yy",},"propertyId":{"name":"can_colide","path":"objects/obj_colision/obj_colision.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"False",},
           ],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":540.0,"y":200.0,},
+        {"$GMRInstance":"v2","%Name":"inst_5165C03","colour":4294967295,"frozen":false,"hasCreationCode":true,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5165C03","objectId":{"name":"obj_interactor","path":"objects/obj_interactor/obj_interactor.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":7.0,"scaleY":1.0,"x":160.0,"y":140.0,},
       ],"layers":[],"name":"Instances_1","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRAssetLayer":"","%Name":"Assets_1","assets":[
         {"$GMRSpriteGraphic":"v1","%Name":"graphic_4ABA0CA9","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_4ABA0CA9","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":8.0,"scaleY":1.0,"spriteId":{"name":"spr_co","path":"sprites/spr_co/spr_co.yy",},"x":160.0,"y":120.0,},

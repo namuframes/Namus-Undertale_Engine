@@ -1,3 +1,10 @@
+function check_langFileExist() {
+	if (!file_exists(global.lang_file)) {
+		return "{s}File:"+global.lang_file+" don't exist!"
+		exit;
+	}
+}
+
 function update_language()
 {
 	if (file_exists(global.lang_file))
@@ -17,18 +24,19 @@ function update_language()
 	}
 }
 
-
 function language_gettext(_text)
 {
 	update_language();
-
-	if (!file_exists(global.lang_file)) {
-		return "{s}File:"+global.lang_file+" don't exist!"
-		exit;
-	}
+	check_langFileExist()
+	return global.textsMap[? _text]
 };
 
 function language_addseq(_text, _seq=0) {
+	if (!file_exists(global.lang_file)) {
+		addtext("{s}File:"+global.lang_file+" don't exist!",0)
+		exit;
+	}
+	
 	var especificKeys = array_create(0);
 	var keys = ds_map_keys_to_array(global.textsMap)
 
@@ -40,11 +48,13 @@ function language_addseq(_text, _seq=0) {
 
 	for (var i = 0; i < array_length(especificKeys); i++) {
 		var _filteredText = especificKeys[i];
-		addtext(global.textsMap[? _filteredText], _seq);
+		addtext(language_gettext(_filteredText), _seq);
 	};
 }
 
 function language_getseq(_text) {
+	check_langFileExist()
+	
 	var especificKeys = array_create(0);
 	var keys = ds_map_keys_to_array(global.textsMap)
 
