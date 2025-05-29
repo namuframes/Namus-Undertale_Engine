@@ -28,7 +28,9 @@ function language_gettext(_text)
 {
 	update_language();
 	check_langFileExist()
-	return global.textsMap[? _text]
+	if (ds_map_exists(global.textsMap, _text)) {
+		return global.textsMap[? _text]
+	} else {return _text+" doesn't exist{&}in the language file!"}
 };
 
 function language_addseq(_text, _seq=0) {
