@@ -1,12 +1,12 @@
-function check_langFileExist() {
-	if (!file_exists(global.lang_file)) {
-		return "{s}File:"+global.lang_file+" don't exist!"
-		exit;
-	}
-}
+global.language = "english"
+global.lang_file = "lang_"+global.language+".txt"
+global.textsMap = ds_map_create();
+
+
 
 function update_language()
 {
+	global.lang_file = "lang_"+global.language+".txt"
 	if (file_exists(global.lang_file))
 	{
 		langfile = file_text_open_read(working_directory + global.lang_file)
@@ -24,16 +24,22 @@ function update_language()
 	}
 }
 
-function language_gettext(_text)
+function check_langFileExist() {
+	if (!file_exists(global.lang_file)) {
+		return "{s}File:"+global.lang_file+" don't exist!"
+		exit;
+	}
+}
+
+function lang_gettext(_text)
 {
-	update_language();
 	check_langFileExist()
 	if (ds_map_exists(global.textsMap, _text)) {
 		return global.textsMap[? _text]
-	} else {return _text+" doesn't exist{&}in the language file!"}
+	} else {return _text+" doesn't exist&in the language file!"}
 };
 
-function language_addseq(_text, _seq=0) {
+function lang_addseq(_text, _seq=0) {
 	if (!file_exists(global.lang_file)) {
 		addtext("{s}File:"+global.lang_file+" don't exist!",0)
 		exit;
@@ -50,11 +56,11 @@ function language_addseq(_text, _seq=0) {
 
 	for (var i = 0; i < array_length(especificKeys); i++) {
 		var _filteredText = especificKeys[i];
-		addtext(language_gettext(_filteredText), _seq);
+		addtext(lang_gettext(_filteredText), _seq);
 	};
 }
 
-function language_getseq(_text) {
+function lang_getseq(_text) {
 	check_langFileExist()
 	
 	var especificKeys = array_create(0);
@@ -68,3 +74,5 @@ function language_getseq(_text) {
 
 	return especificKeys
 }
+	
+update_language()

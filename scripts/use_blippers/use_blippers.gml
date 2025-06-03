@@ -19,10 +19,6 @@ function use_blippers(command){
 				shake_range = arg[1]
 			}
 		break;
-		case "&" :
-			break_line();
-			_space++;
-		break;
 		//----------------------------------------------
 		case "face":
 			if (instance_exists(oDialogueBox))

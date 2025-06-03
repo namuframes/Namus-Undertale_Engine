@@ -16,10 +16,10 @@ function wrap_formatted_text(text, line_length) {
 				var lookahead_char = string_char_at(text, j);
 				
 				if (lookahead_char == " " || 
-				lookahead_char == "\n" || 
+				lookahead_char == "&" || 
 				lookahead_char == "") {
 					if (current_line_length + lookahead_length > line_length) {
-						wrapped_text += "\n";
+						wrapped_text += "&";
 						current_line_length = 0;
 					} else {
 						// The space still hasn't been added to the string, so add it here if we don't need to
@@ -67,7 +67,7 @@ function wrap_formatted_text(text, line_length) {
 			wrapped_text += char;
 			
 			// Handle intentional newlines
-    		if (char == "\n") {
+    		if (char == "&") {
     			current_line_length = 0;
     		} else {
     		    current_line_length++;

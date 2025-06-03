@@ -10,11 +10,13 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 	mod_shake = 0;
 	shake_range = 1;
 	wave_range = 0;
+
 	var _surf = array_create(0);
 	_surf[0] = surface_create(surface_get_width(application_surface),surface_get_height(application_surface));
 	_surf[1] = surface_create(surface_get_width(application_surface),surface_get_height(application_surface));
-	for (var i = 1; i < text_length; i++) {
+	for (var i = 1; i < text_length;) {
 		char = string_char_at(text, i);
+		char_vis = true
 		break_line = function()
 		{	
 			_space = -1
@@ -25,11 +27,12 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 			_line++;
 		}
 		
-		if (char == "*")
-		{
-			is_aster = true
-			_space = 0
+		if (char == "&") {
+			char_vis = false;
+			break_line();
 		}
+		
+		if (char == "*") {is_aster = true; _space = 0;}
 
 		var _coswave = cos((global.time*6)-i)*(3+wave_range)
 		var let_space = [char_spacing*_xscale/2,(line_spacing*_yscale/2)*2.25]
@@ -37,7 +40,7 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 		var final_y = _y+(let_space[1])*_line+(_coswave*mod_wave)+(random_range(-shake_range, shake_range)*mod_shake)
 
 		if (surface_exists(_surf[1])) {
-			if (_outline > 0)	{ //Drawing the outline in a specfic surface
+			if (_outline > 0 && char_vis)	{ //Drawing the outline in a specfic surface
 				for (var j = 0; j < _outline+1; j++) { //Outline
 					if (surface_exists(_surf[0])) {
 						surface_set_target(_surf[0])
@@ -57,19 +60,17 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 			surface_set_target(_surf[1])
 
 			#region Blipper stuff
-				if (char == "\n") {break_line();}
-
 				if (char == "{")	{
 					var commandStart = string_pos_ext("{", text, i)
 					var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
-					i += string_length(command)+1
+					i += string_length(command)+2
 					use_blippers(command)
 					surface_reset_target();
 					continue;
 				}
 			#endregion
 
-			draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle);
+			if (char_vis) {draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)};
 			
 			surface_reset_target();
 			
@@ -78,6 +79,7 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 
 		}
 		_space++;
+		i++;
 	}
 
 	surface_free(_surf[0]); surface_free(_surf[1])
