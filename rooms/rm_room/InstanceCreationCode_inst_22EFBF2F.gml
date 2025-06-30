@@ -1,1 +1,1 @@
-addtext(lang_gettext("test"))
+addtext(lang_gettext("teste1"))

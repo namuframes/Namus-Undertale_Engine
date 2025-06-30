@@ -142,6 +142,7 @@
     {"id":{"name":"GMLiveAPI","path":"scripts/GMLiveAPI/GMLiveAPI.yy",},},
     {"id":{"name":"INVENTORY_ITEMS_FUNCTIONS","path":"scripts/INVENTORY_ITEMS_FUNCTIONS/INVENTORY_ITEMS_FUNCTIONS.yy",},},
     {"id":{"name":"LANGUAGE_SCRIPTS","path":"scripts/LANGUAGE_SCRIPTS/LANGUAGE_SCRIPTS.yy",},},
+    {"id":{"name":"Loadstring","path":"scripts/Loadstring/Loadstring.yy",},},
     {"id":{"name":"room_goto_trans","path":"scripts/room_goto_trans/room_goto_trans.yy",},},
     {"id":{"name":"scr_diabox_script","path":"scripts/scr_diabox_script/scr_diabox_script.yy",},},
     {"id":{"name":"scr_inputs","path":"scripts/scr_inputs/scr_inputs.yy",},},

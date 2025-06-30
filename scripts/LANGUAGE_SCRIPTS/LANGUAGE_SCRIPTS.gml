@@ -1,11 +1,11 @@
 global.language = "english"
-global.lang_file = "lang_"+global.language+".txt"
-global.textsMap = ds_map_create();
-
-
+global.lang_file = "lang_"+global.language+".json"
+var _json = LoadString(global.lang_file);
+global.textMap = json_parse(_json);
 
 function update_language()
 {
+	/*
 	global.lang_file = "lang_"+global.language+".txt"
 	if (file_exists(global.lang_file))
 	{
@@ -21,7 +21,7 @@ function update_language()
 			_string = file_text_read_string(langfile)
 		}
 		file_text_close(langfile);
-	}
+	}*/
 }
 
 function check_langFileExist() {
@@ -34,8 +34,8 @@ function check_langFileExist() {
 function lang_gettext(_text)
 {
 	check_langFileExist()
-	if (ds_map_exists(global.textsMap, _text)) {
-		return global.textsMap[? _text]
+	if (file_exists(global.lang_file)) {
+		return struct_get(global.textMap,_text)
 	} else {return _text+" doesn't exist&in the language file!"}
 };
 
