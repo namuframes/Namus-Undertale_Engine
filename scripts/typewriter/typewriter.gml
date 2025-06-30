@@ -10,7 +10,7 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 	blip = _blip;
 	can_skip = true;
 	can_pass = true;
-	textspd = _textspd;
+	textspd = (delta_time/100000)*_textspd;
 	text = wrap_formatted_text(_text, line_length);
 	text_length = string_length(text);
 	delay = 1*textspd;
@@ -80,7 +80,7 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 			}
 		}
 		
-		return (char == " " || char == "\n") && !exclude;
+		return (char == " " || char == "&") && !exclude;
 	}
 	
 	parse_tags();
