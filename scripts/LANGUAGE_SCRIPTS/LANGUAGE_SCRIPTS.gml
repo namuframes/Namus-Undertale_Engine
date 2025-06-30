@@ -1,5 +1,5 @@
 global.language = "english"
-global.lang_file = "lang_"+global.language+".json"
+global.lang_file = working_directory+"lang_"+global.language+".json"
 
 function update_language()
 {
