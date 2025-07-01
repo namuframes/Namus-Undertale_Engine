@@ -39,11 +39,13 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 		var final_x = _x+(_space*let_space[0])+(random_range(-shake_range, shake_range)*mod_shake)
 		var final_y = _y+(let_space[1])*_line+(_coswave*mod_wave)+(random_range(-shake_range, shake_range)*mod_shake)
 
+		
 		if (surface_exists(_surf[1])) {
 			if (_outline > 0 && char_vis)	{ //Drawing the outline in a specfic surface
 				for (var j = 0; j < _outline+1; j++) { //Outline
 					if (surface_exists(_surf[0])) {
 						surface_set_target(_surf[0])
+						draw_clear_alpha(c_black, 0)
 						draw_text_transformed_color(final_x+j, final_y, char, _xscale, _yscale,_angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x-j, final_y, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
@@ -58,7 +60,6 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 				}
 			}
 			surface_set_target(_surf[1])
-
 			#region Blipper stuff
 				if (char == "{")	{
 					var commandStart = string_pos_ext("{", text, i)
@@ -78,6 +79,7 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 			draw_surface(_surf[1], 0, 0)
 
 		}
+
 		_space++;
 		i++;
 	}
