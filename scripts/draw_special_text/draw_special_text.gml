@@ -41,11 +41,12 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 
 		
 		if (surface_exists(_surf[1])) {
+			
 			if (_outline > 0 && char_vis)	{ //Drawing the outline in a specfic surface
+				surface_set_target(_surf[0])
+				draw_clear_alpha(c_black, 0)
 				for (var j = 0; j < _outline+1; j++) { //Outline
 					if (surface_exists(_surf[0])) {
-						surface_set_target(_surf[0])
-						draw_clear_alpha(c_black, 0)
 						draw_text_transformed_color(final_x+j, final_y, char, _xscale, _yscale,_angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x-j, final_y, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
@@ -55,11 +56,12 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 						draw_text_transformed_color(final_x-j, final_y-j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x-j, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
 						draw_text_transformed_color(final_x+j, final_y-j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-						surface_reset_target();
 					}
 				}
+				surface_reset_target();
 			}
 			surface_set_target(_surf[1])
+
 			#region Blipper stuff
 				if (char == "{")	{
 					var commandStart = string_pos_ext("{", text, i)
@@ -72,12 +74,11 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 			#endregion
 
 			if (char_vis) {draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)};
-			
+
 			surface_reset_target();
 			
 			draw_surface(_surf[0], 0, 0)
 			draw_surface(_surf[1], 0, 0)
-
 		}
 
 		_space++;
