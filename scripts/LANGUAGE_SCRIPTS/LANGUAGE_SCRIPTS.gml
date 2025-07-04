@@ -3,7 +3,7 @@ global.lang_file = working_directory+"lang_"+global.language+".json"
 
 function update_language()
 {
-	global.lang_file = "lang_"+global.language+".json"
+	global.lang_file = working_directory+"lang_"+global.language+".json"
 	var _json = LoadString(global.lang_file);
 	global.textMap = json_parse(_json);
 }
@@ -21,43 +21,37 @@ function lang_gettext(_text)
 {
 	check_langFileExist()
 	if (file_exists(global.lang_file)) {
-		return struct_get(global.textMap,_text)
+		return string(struct_get(global.textMap,_text))
 	} else {return _text+" doesn't exist&in the language file!"}
 };
 
-function lang_addseq(_text, _seq=0) {
-	if (!file_exists(global.lang_file)) {
-		addtext("{s}File:"+global.lang_file+" don't exist!",0)
-		exit;
-	}
-	
-	var especificKeys = array_create(0);
-	var keys = ds_map_keys_to_array(global.textsMap)
-
-	for (var i = array_length(keys)-1; i > -1; i--) { //Filtering the text case it wants to get an specific sequence
-		if (string_copy(keys[i], 1, string_length(_text)) == _text) {
-			array_push(especificKeys,keys[i])
-		}
-	}
-
-	for (var i = 0; i < array_length(especificKeys); i++) {
-		var _filteredText = especificKeys[i];
-		addtext(lang_gettext(_filteredText), _seq);
-	};
-}
-
-function lang_getseq(_text) {
+function lang_getseq(_text) { //Te amo tales, valeu <3 :)
 	check_langFileExist()
-	
-	var especificKeys = array_create(0);
-	var keys = ds_map_keys_to_array(global.textsMap)
 
-	for (var i = array_length(keys)-1; i > -1; i--) { //Filtering the text case it wants to get an specific sequence
-		if (string_copy(keys[i], 1, string_length(_text)) == _text) {
-			array_push(especificKeys,keys[i])
-		}
+	var i = 1;
+	var array_texts = array_create(0);
+	if (!struct_exists(global.textMap, _text+string(i))) {return ["* Not Found!"]; exit} //_text not found whatever
+	
+	while (true) {
+		var finText = _text+string(i)
+		if (!struct_exists(global.textMap, finText)) {break;}
+		
+		array_push(array_texts, struct_get(global.textMap,finText))
+		i++;
 	}
-
-	return especificKeys
-}
 	
+	return array_texts
+}
+
+function lang_addseq(_text) {
+	check_langFileExist()
+	var i = 1;
+	
+	while (true) {
+		var finText = _text+string(i)
+		if (!struct_exists(global.textMap, finText)) {break;}
+		
+		addtext(struct_get(global.textMap,finText))
+		i++;
+	}
+}

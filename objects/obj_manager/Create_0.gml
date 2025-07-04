@@ -8,7 +8,7 @@ global.stat_name = "Chara";
 global.stat_hp = 15;
 global.stat_hpmax = 20;
 global.stat_lv = 1;
-global.stat_gold = 0;
+global.stat_gold = 15;
 global.stat_exp = 0;
 global.stat_atk = 0;
 global.stat_def = 0;
@@ -29,9 +29,9 @@ global.follower_quant = 1;
 global.inventory = array_create(0)
 add_item(ITEMS.stick)
 add_item(ITEMS.bandage);
-add_item("burgur");
-global.weapon = get_item(ITEMS.toyKnife)
-global.armor = get_item("none");
+add_item(ITEMS.toyKnife);
+global.weapon = 0;
+global.armor = 0;
 
 global.armor_stat = 0;
 global.weapon_stat = 0;

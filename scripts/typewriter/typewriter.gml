@@ -1,6 +1,6 @@
 
 // Creates a new typewriter ("types" characters out one at a time).
-function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _text, _textspd = 1) constructor {
+function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _text, _textspd = 1, _xscale=2, _yscale=2) constructor {
 	shown_chars = 0;
 	shown_text = "";
 	font = _font;
@@ -21,6 +21,7 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 	skip_all = false;
 	go_forward = false;
 	play_blip = function() {if (blip != noone) {audio_play_sound(blip, 1, false, 1, 0, random_range(1, 1.02))};}
+	size = [_xscale,_yscale]
 	
 	// Scans for and parses as many tags as possible from the current text position.
 	static parse_tags = function() {
@@ -127,6 +128,6 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 	
 	// Draws the currently shown characters.
 	static draw = function(_x, _y) {
-		draw_special_text(_x, _y, char_spacing, line_spacing,font, shown_text, 2, 2, 0);
+		draw_special_text(_x, _y, char_spacing, line_spacing,font, shown_text, size[0], size[1], 0);
 	}
 }

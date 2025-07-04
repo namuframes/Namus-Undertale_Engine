@@ -13,7 +13,7 @@ if (global.debug)
 }
 var _weapon = global.weapon;
 var _armor = global.armor;
-global.weapon_stat = _weapon.effect;
-global.armor_stat = _armor.effect;
+global.weapon_stat = is_struct(_weapon) ? _weapon.effect : 0;
+global.armor_stat = is_struct(_armor) ? _armor.effect : 0;
 
 if (global.stat_hp == 0) {show_message("You died"); game_end();}

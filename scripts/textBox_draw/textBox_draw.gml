@@ -1,9 +1,11 @@
 // Os recursos de script mudaram para a v2.3.0; veja
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 para obter mais informações
-function textBox_draw(_____x,_____y){
+function textBox_draw(_____x,_____y, ____xscale=2,___yscale=2){
 	__y = _____y
 	text_x = _____x+25;
 	text_y = __y+20;
+	__xscale= ____xscale
+	__yscale= ___yscale
 
 	portrait_offset();
 	set_character();
@@ -63,7 +65,7 @@ function textBox_draw(_____x,_____y){
 	if (resetPort > -1) {resetPort--;} 
 	if (resetPort == 0) {portrait = ""}
 
-	if (!is_struct(dialogue)) {dialogue = new typewriter(font, letter_width, line_space, line_end, blip_sound, text, text_speed)}
+	if (!is_struct(dialogue)) {dialogue = new typewriter(font, letter_width, line_space, line_end, blip_sound, text, text_speed,__xscale, __yscale)}
 	else
 	{	
 		if (dialogue.font == font) {

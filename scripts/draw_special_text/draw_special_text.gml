@@ -1,4 +1,4 @@
-function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spacing=5, font, text, _xscale=1, _yscale=1, _angle=0, color = TEXTconfig.color, _outline=4)
+function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spacing=5, font, text, _xscale=1, _yscale=1, _angle=0, color = TEXTconfig.color, _outline=2)
 {
 	draw_set_color(color);
 	draw_set_font(font)
@@ -40,9 +40,9 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 		var final_y = _y+(let_space[1])*_line+(_coswave*mod_wave)+(random_range(-shake_range, shake_range)*mod_shake)
 
 		
-		if (surface_exists(_surf[1])) {
+		if (surface_exists(_surf[1]) && char_vis) {
 			
-			if (_outline > 0 && char_vis)	{ //Drawing the outline in a specfic surface
+			if (_outline > 0)	{ //Drawing the outline in a specfic surface
 				surface_set_target(_surf[0])
 				draw_clear_alpha(c_black, 0)
 				for (var j = 0; j < _outline+1; j++) { //Outline
@@ -73,7 +73,7 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 				}
 			#endregion
 
-			if (char_vis) {draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)};
+			draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)
 
 			surface_reset_target();
 			
@@ -82,7 +82,7 @@ function draw_special_text(_x, _y, char_spacing=font_get_size(font)+4, line_spac
 		}
 
 		_space++;
-		i++;
+		i++
 	}
 
 	surface_free(_surf[0]); surface_free(_surf[1])

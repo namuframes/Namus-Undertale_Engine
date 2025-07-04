@@ -1,1 +1,1 @@
-room_goto(rm_room);
+room_goto(rm_shop);

@@ -1,14 +1,12 @@
-if (global.debug  && room != rm_battle)
+if (global.debug)
 {
-	draw_set_font(fnt_main);
-	draw_set_alpha(0.5)
-	draw_rectangle_color(0,10,1000,85, c_black, c_black, c_black, c_black, false)
-	draw_set_alpha(1)
-	draw_text(10,25,global.dia_msg);
-	//draw_text(10,35,global.dia_character);
-	//draw_text(10,45,global.dia_question);
-	//draw_text(10,55,global.dia_questionResult);
-	//draw_text(10,65,global.interact_cooldown);
+	if (room != rm_battle && room != rm_shop) {
+		draw_set_font(fnt_main);
+		draw_set_alpha(0.5)
+		draw_rectangle_color(0,10,1000,85, c_black, c_black, c_black, c_black, false)
+		draw_set_alpha(1)
+		draw_text(10,25,global.dia_msg);
+	}
 	draw_set_color(c_yellow);
 	draw_text(5,5,"Debug Mode.");
 	draw_set_color(c_white);

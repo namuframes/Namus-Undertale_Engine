@@ -58,11 +58,11 @@ if (global.in_menu)
 				draw_text(my_x+14,my_y+110,"DF  "+string(global.stat_def));
 				draw_text(my_x+98,my_y+94,"EXP  "+string(global.stat_exp));
 				
-				var armor = global.armor;
-				var weapon = global.weapon;
+				var armor = is_struct(global.armor) ? global.armor.name : "<NONE>";
+				var weapon = is_struct(global.weapon) ? global.weapon.name : "<NONE>";
 				
-				if (global.weapon.name != "") draw_text(my_x+14,my_y+140,"WEAPON: "+weapon.name+" ("+string(global.weapon_stat)+")");
-				if (global.armor.name != "") draw_text(my_x+14,my_y+156,"ARMOR: "+armor.name+ " ("+string(global.armor_stat)+")");
+				draw_text(my_x+14,my_y+140,"WEAPON: "+weapon+" ("+string(global.weapon_stat)+")");
+				draw_text(my_x+14,my_y+156,"ARMOR: "+armor+ " ("+string(global.armor_stat)+")");
 				
 				draw_text(my_x+14,my_y+176,"GOLD: "+string(global.stat_gold));
 				setheart_pos(_x,_y, 0)

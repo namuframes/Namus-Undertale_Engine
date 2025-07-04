@@ -20,7 +20,7 @@ for (var i = npc_array_size; i >= 0; i--)
 }
 
 moving = false;
-image_index = 1;
+image_index = 0;
 
 sprite[0] = spr_main_r;
 sprite[1] = spr_main_u;

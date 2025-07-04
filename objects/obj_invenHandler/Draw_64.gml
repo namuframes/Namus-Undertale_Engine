@@ -53,13 +53,17 @@ if (accept_key_p && global.interact_cooldown <= 0) //Pressed the accpet key
 					{
 						if (item_type(choosen_item) == ITEMTYPES.weapon) //Checking the current item is an weapon
 						{
-							global.inventory[item_index] = global.weapon; //Replacing the item slot with the weapon
+							if (is_struct(global.weapon)) {
+								global.inventory[item_index] = global.weapon; //Replacing the item slot with the weapon
+							} else {array_delete(global.inventory, item_index, 1)}
 							global.weapon = choosen_item; //Wearing the selected item as an weapon
 						}
 						
 						if (item_type(choosen_item) == ITEMTYPES.armor) //Checking the current item is an armor
 						{
-							global.inventory[item_index] = global.armor; //Replacing the item slot with the armor
+							if (is_struct(global.armor)) {
+								global.inventory[item_index] = global.armor; //Replacing the item slot with the armor
+							} else {array_delete(global.inventory, item_index, 1)}
 							global.armor = choosen_item; //Wearing the selected item as an armor
 						}
 						oneShot_text("* You equipped the "+choosen_item.name+".")

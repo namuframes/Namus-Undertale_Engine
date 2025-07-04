@@ -11,13 +11,17 @@ function use_blippers(command){
 		case "c_blue": draw_set_color(c_blue) break;
 		case "c_purple": draw_set_color(#a200ff) break;
 		case "c_defualt": draw_set_color(TEXTconfig.color) break;
+		case "c_gray": draw_set_color(c_gray) break;
+		case "c_cyan": draw_set_color(c_aqua) break;
 		case "wave": mod_wave = 1 break;
+		case "/wave": mod_wave = 0 break;
 		case "shake": 
 			mod_shake = 1 
-			if (array_length(arg) > 1)
-			{
-				shake_range = arg[1]
-			}
+			if (array_length(arg) > 1){shake_range = arg[1]}
+		break;
+		case "/shake": 
+			mod_shake = 0
+			shake_range = 1;
 		break;
 		//----------------------------------------------
 		case "face":

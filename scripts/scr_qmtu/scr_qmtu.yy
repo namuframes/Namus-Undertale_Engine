@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_qmtu",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_qmtu",
+  "parent":{
+    "name":"INTERACTIONS",
+    "path":"folders/Sprites/SHOP/INTERACTIONS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
