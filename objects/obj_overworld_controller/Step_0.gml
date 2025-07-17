@@ -15,8 +15,12 @@ if (global.in_menu) {
 		var prev_val = curoption;
 		var vsp = (down_key_p-up_key_p);
 		curoption += vsp;
-		curoption = clamp(curoption,0,array_length(options)-1);
-		if (curoption != prev_val) {audio_play_sound(sfx_select,1,false,2);}
+		
+		if (curoption != prev_val) {
+			if (curoption > array_length(options)-1) {curoption = 0}
+			if (curoption < 0) {curoption = array_length(options)-1}
+			audio_play_sound(sfx_select,1,false,2);
+		}
 		var _opa = options[curoption] 
 		if (accept_key_p) 
 		{

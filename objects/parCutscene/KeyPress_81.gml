@@ -1,1 +1,0 @@
-timer = get_integer("Type in a timer value", timer)

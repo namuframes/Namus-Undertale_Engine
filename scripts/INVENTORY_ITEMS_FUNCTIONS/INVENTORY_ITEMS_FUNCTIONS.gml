@@ -24,9 +24,9 @@ function get_item(item) //Getting an especific item info
 	switch(item)
 	{
 		// case ITEMS.: return new create_item("", ITEMTYPES., 0, "* ") break;
-		case ITEMS.stick: return new create_item("Stick", ITEMTYPES.weapon, 0, "* \"Stick\" - Weapon AT 0&* Its bark is worse than&its bite.","AT 0&It bites.") break;
-		case ITEMS.bandage: return new create_item("Bandage", ITEMTYPES.food, 10, "* \"Bandage\" - Heals 10 HP&* It has already been used&several times.") break;
-		case ITEMS.toyKnife: return new create_item("Toy Knife", ITEMTYPES.weapon, 3, "* \"Toy Knife\" - Weapon AT 3&* Made of plastic.&* A rarity nowadays.") break;
+		case ITEMS.stick: return new create_item("Stick", ITEMTYPES.weapon, 0, "* \"Stick\" - Weapon AT 0\n* Its bark is worse than\nits bite.","AT 0\nIt bites.") break;
+		case ITEMS.bandage: return new create_item("Bandage", ITEMTYPES.food, 10, "* \"Bandage\" - Heals 10 HP\n* It has already been used several times.") break;
+		case ITEMS.toyKnife: return new create_item("Toy Knife", ITEMTYPES.weapon, 3, "* \"Toy Knife\" - Weapon AT 3\n* Made of plastic.\n* A rarity nowadays.") break;
 		case "burgur": return new create_item("BUrguer", ITEMTYPES.food, 10, "* Some fat ass burguer bro, idk") break;
 		case "Espadão": return new create_item("espadão", ITEMTYPES.food, 10, 
 		["* Dá muito dano mas faz parecer q tu ta segurando meu pa-{w,10} {>}","{s}* UEPA CALMA AE ISSO N É UM JOGO ADULTO N PORRA"], 

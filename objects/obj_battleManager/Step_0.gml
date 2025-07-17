@@ -23,11 +23,10 @@ switch(global.curTurn)
 	
 	case baTURNS.playerTurnInit:
 		depth = obj_battleBox.depth-1
-		selectedOption = savedMenuPos[array_length(savedMenuPos)-1];
+		selectedOption = array_last(savedMenuPos);
 		page = baPAGES.MAIN;
-		array_delete(prevPage, 0, array_length(prevPage))
+		array_pop(prevPage)
 		choosenEnemie = 0;
-		textMain = 0;
 		battletime = 0;
 		instance_destroy(obj_soul);
 		instance_destroy(par_bullet, false);
@@ -63,8 +62,8 @@ switch(global.curTurn)
 		{
 			page = prevPage[array_length(prevPage)-1] //Changing the page to the most recent one in the prevPage array
 			selectedOption = savedMenuPos[array_length(savedMenuPos)-1];
-			array_delete(prevPage, array_length(prevPage)-1, 1)
-			array_delete(savedMenuPos, array_length(savedMenuPos)-1, 1)
+			array_pop(prevPage)
+			array_pop(savedMenuPos)
 		}
 
 		if (global.interact_cooldown > 0 && page != baPAGES.MAIN) {global.interact_cooldown--;}
@@ -79,6 +78,7 @@ switch(global.curTurn)
 	break;
 	
 	case baTURNS.enemieTurn:
+		writerInfo[?"main"].letter = 0
 		battletime++;
 	break;
 }

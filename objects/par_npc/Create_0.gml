@@ -1,6 +1,5 @@
 if (live_call()) {return live_result}
 event_inherited();
-
 page = 0;
 
 intBox[0] = interactBox_x;

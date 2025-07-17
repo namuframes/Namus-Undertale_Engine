@@ -4,7 +4,7 @@ draw_set_alpha(blackInfo[0]) //BLACK RECTANGLE TO MAKE THE PAUSE MENU BEAUTIFULL
 draw_rectangle_color(0, 0, 900, 900, c_black, c_black, c_black, c_black, false)
 draw_set_alpha(1)
 
-//draw_text(10,10, string(inputCooldown)+"&"+string(global.interact_cooldown))
+//draw_text(10,10, string(inputCooldown)+"\n"+string(global.interact_cooldown))
 
 if (global.inPause)
 {	

@@ -44,7 +44,7 @@ if (page != "Talk-Cutscene") {
 					}
 					if (action == "No") {
 						cancel_key_p = true;
-						typewriters.buy_text = "...{w,10}&Quer receber bala maluco?"
+						typewriters.buy_text = "...{w,10}\nQuer receber bala maluco?"
 					}
 					if (action == "Fuk you") {show_message(vaiTuSeFudeAiIrmao)}	
 					array_pop(prev_op);
@@ -89,12 +89,11 @@ if (page != "Talk-Cutscene") {
 		global.interact_cooldown = 2
 	}
 
-	if (accept_key_p || (cancel_key_p && array_length(prev_page) > 0)) {
-		typewriters.main = 0;
-		typewriters.buy = 0;
+	if ((accept_key_p || cancel_key_p) && array_length(prev_page) > 0) {
+		writerInfo[?"main"].letter = 0;
+		if (ds_map_exists(writerInfo, "buy")) {writerInfo[?"buy"].letter = 0};
 	}
 } else {
-	
 	if (!instance_exists(cutscene_instance)) {
 		page = "Talk"
 		cutscene_instance = 0;

@@ -10,7 +10,7 @@ if (global.debug)
 	{
 		var _t = ""
 		var _tam = array_length(debug_texts)
-		_t += string(debug_texts[i])+"&"
+		_t += string(debug_texts[i])+"\n"
 		draw_text(x,y-sprite_height-(20*_tam)+(20*i),_t);
 	}
 	draw_set_font(-1)

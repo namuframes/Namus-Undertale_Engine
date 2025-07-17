@@ -29,6 +29,7 @@
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"_script","filters":[],"listItems":[],"multiselect":false,"name":"_script","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":5,},
     {"$GMObjectProperty":"v1","%Name":"press_z","filters":[],"listItems":[],"multiselect":false,"name":"press_z","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"False","varType":3,},
+    {"$GMObjectProperty":"v1","%Name":"destroy_self","filters":[],"listItems":[],"multiselect":false,"name":"destroy_self","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"true","varType":3,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

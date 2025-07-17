@@ -1,3 +1,3 @@
-if (script_exists(cutscene)) {
-	script_execute(cutscene);	
-}
+event_inherited();
+
+script_execute(cutscene);

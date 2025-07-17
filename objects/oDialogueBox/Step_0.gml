@@ -1,57 +1,72 @@
 if (live_call()) {return live_result};
 scr_inputs();
-if (setshit = true && text = noone)	{
-	text = texttodraw[curmsg];
-	dialogue = noone
-	setshit = false;
-}
-in_question = array_length(question) > 0 && curmsg >= array_length(texttodraw)-1
-if (is_struct(dialogue))	{
-	dialogue.blip = blip_sound;
-	dialogue.font = font;
-	dialogue.char_spacing = letter_width+offset[3];
-	dialogue.line_spacing = line_space+offset[4];
-	dialogue.line_length = line_end+offset[5];
-	dialogue.text = wrap_formatted_text(text, dialogue.line_length);
+var text_length = string_length(text)
+var map = writerInfo[?"box"]
+finished_wiriting = map.letter > text_length
 
-	var _portrait = asset_get_index(portrait)
-	
-	if (asset_get_type(_portrait) == asset_sprite) {
-		portTimeDef = sprite_get_speed(_portrait)
-		if (portTime > 0) {portTime -= portTimeDef/2} else {
-			if (dialogue.shown_text != dialogue.text) 
-			{
-				portrait_frame++;
-				portrait_frame = clamp(portrait_frame, 0, sprite_get_number(sprite_get_number(_portrait)-1))
-			} else { portrait_frame = 0}
+if (array_length(texttodraw) > 0) {
+	if (asset_get_type(portrait) == asset_sprite)	{ //Checking what character is talking
+		#region Portrait Frame Animation
+			portTimeDef = sprite_get_speed(portrait)
+			if (portTime > 0) {portTime -= portTimeDef*0.15}
+			if (portTime <= 0) {
+				var frameQuant = sprite_get_number(portrait)
 			
-			if (portrait_frame > sprite_get_number(_portrait)-1) {
-				portrait_frame = 0;
+				if (map.letter < text_length+1) {
+					portrait_frame++;
+					portTime = portTimeDef
+				}
+				if (portrait_frame > frameQuant-1) {portrait_frame = 0};
+			
+				if (finished_wiriting || map.waitZ) {portrait_frame = 0}
 			}
-			
-			if (dialogue.press_z) {portrait_frame = 0}
-			portTime = portTimeDef
-		}
-	}
+		#endregion
+		
+		#region Grabbing the sprite name
+		var _p = sprite_get_name(portrait)
+		var _a = string_count("_", _p) > 0 ? string_pos("_", _p) : 0
+		var portName = ""
+		
 
-	finished_wiriting = dialogue.shown_chars >= dialogue.text_length;
-
-	if (accept_key_p && !in_question)	{
-		if (dialogue.shown_chars >= string_length(text) && dialogue.can_pass)	{
-			next_message()
+		for(var i=_a+1; i < string_length(_p); i++) {
+			var char = string_char_at(_p, i);
+			if ((char >= "A" || char <= "Z") || (char >= "a" || char <= "z") && char != "_") {
+				portName += char
+			} else {break}	
 		}
+		#endregion
+		
+		switch(portName) {
+			case "asgore":
+				set_character(snd_txtasg)
+			break;
+		}
+	} else {
+		set_character()
 	}
+	
 
 	
-	if (keyboard_check(vk_control) && dialogue.can_skip) {//Automatic skip
-		dialogue.shown_chars = dialogue.text_length;
-		dialogue.shown_text = dialogue.text;
+	if (accept_key_p && !in_question)	{
+		if (map.letter >= text_length) next_message()
+	}
+
+	if (cancel_key) {//Automatic skip
+		map.letter = text_length+1;
+	}
+	
+	if (keyboard_check(vk_control)) {//Automatic skip
+		map.letter = text_length+1;
 		skip_timer--;
 		
-		if (dialogue.shown_chars >= dialogue.text_length && skip_timer <= 0 && !in_question) {
+		if (map.letter >= text_length+1 && skip_timer <= 0 && !in_question) {
 			next_message();
 			skip_timer = 2;
 		}
 	}
 
+	if (curmsg < array_length(texttodraw)) {
+		text = texttodraw[curmsg]
+	}
 }
+

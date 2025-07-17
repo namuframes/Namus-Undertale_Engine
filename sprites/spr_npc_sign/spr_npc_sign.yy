@@ -1,11 +1,11 @@
 {
   "$GMSprite":"",
   "%Name":"spr_npc_sign",
-  "bboxMode":1,
+  "bboxMode":2,
   "bbox_bottom":19,
   "bbox_left":0,
   "bbox_right":19,
-  "bbox_top":0,
+  "bbox_top":13,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,

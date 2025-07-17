@@ -81,7 +81,7 @@ function typewriter(_font, _char_spacing, _line_spacing, _line_length, _blip, _t
 			}
 		}
 		
-		return (char == " " || char == "&") && !exclude;
+		return (char == " " || char == "\n") && !exclude;
 	}
 	
 	parse_tags();

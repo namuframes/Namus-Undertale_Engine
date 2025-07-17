@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"unused_cutsceneScripts",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"unused_cutsceneScripts",
+  "parent":{
+    "name":"CUTSCENESCRIPTS",
+    "path":"folders/Scripts/CUTSCENESCRIPTS.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

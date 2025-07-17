@@ -9,11 +9,10 @@ quick_cutscene = function(_text) {
 	with(cutsceneInstance) {
 		switch(timer) {
 			case 0:
-				create_box(_text);
-			break;
-			
-			case 1:
-				instance_destroy()
+				c_dialogue(_text);
+				c_wait_dialogue();
+				c_end();
+				timer++
 			break;
 		}
 	}

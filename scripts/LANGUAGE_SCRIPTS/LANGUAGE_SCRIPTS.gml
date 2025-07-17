@@ -22,7 +22,7 @@ function lang_gettext(_text)
 	check_langFileExist()
 	if (file_exists(global.lang_file)) {
 		return string(struct_get(global.textMap,_text))
-	} else {return _text+" doesn't exist&in the language file!"}
+	} else {return _text+" doesn't exist\nin the language file!"}
 };
 
 function lang_getseq(_text) { //Te amo tales, valeu <3 :)

@@ -2,6 +2,7 @@ event_inherited();
 
 if (actionSel == acts[1]) { //Pet action
 	with(cutsceneInstance) {
+		/*
 		switch(timer) {
 			case 0:
 				create_box("* You pet dilo")
@@ -23,7 +24,10 @@ if (actionSel == acts[1]) { //Pet action
 			case 3:
 				instance_destroy()
 			break;
-		}
+		}*/
+		c_dialogue("* You pet Dilo")
+		c_wait_dialogue();
+		c_end();
 	}
 	can_spare = true;
 }

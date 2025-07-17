@@ -8,6 +8,7 @@ function setheart_pos(_x, _y, alpha=1, _smooth=0.3, _round=false){
 	if (point_distance(heartpos[0], heartpos[1], _x, _y) > 50) {
 		heartpos[0] = _x
 		heartpos[1] = _y
+		heartpos[2] = alpha
 	}
 	if (_round)
 	{

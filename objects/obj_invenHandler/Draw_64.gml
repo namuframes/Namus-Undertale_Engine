@@ -16,8 +16,15 @@ switch (page[curpage]) {	//Upodating the input!
 		inputLimit_array = global.inventory //re-seting the limits of selected 
 	break;
 }
+var prev_input = selectedItem;
 selectedItem += input;
-selectedItem = clamp(selectedItem, 0, array_length(inputLimit_array)-1)
+
+
+if (selectedItem != prev_input) {
+	if (selectedItem > array_length(inputLimit_array)-1) {selectedItem = 0}
+	if (selectedItem < 0) {selectedItem = array_length(inputLimit_array)-1}
+}
+
 draw_box(_x, _y, _x+150, _y+300)
 
 for (var i=0; i < array_length(global.inventory); i++) //Drawing the items
@@ -25,7 +32,7 @@ for (var i=0; i < array_length(global.inventory); i++) //Drawing the items
 	var my_x = _x+40
 	var my_y = _y+20+(30*i)
 
-	draw_special_text(my_x, my_y, char_width, 0, fnt_main, global.inventory[i].name, 2, 2)
+	draw_special_text(my_x, my_y, .5, 0, fnt_main, global.inventory[i].name, 2, 2)
 	if (selectedItem == i && page[curpage]="item") {setheart_pos(my_x-26, my_y+8)}
 }
 
@@ -33,7 +40,7 @@ for (var i=0; i < array_length(actions); i++) { //Drawing the action choices
 	var my_x = _x+(105*i)+40;
 	if (actions[i] == "INFO") {my_x-=6} //Fixing the info text position
 	var my_y = _y+305
-	draw_special_text(my_x, my_y, char_width, 0, fnt_main, actions[i], 2, 2)
+	draw_special_text(my_x, my_y, .5, 0, fnt_main, actions[i], 2, 2)
 	if (selectedItem == i && page[curpage]="action") {setheart_pos(my_x-26, my_y+8)}
 }
 
@@ -72,7 +79,7 @@ if (accept_key_p && global.interact_cooldown <= 0) //Pressed the accpet key
 						audio_play_sound(snd_heal_c, 1, false)
 						global.stat_hp += choosen_item.effect
 						//Adding the maced out text if the HP is higher or equal to the MAX HP
-						var maxedout_text = (global.stat_hp >= global.stat_hpmax) ? "&* Your HP was maxed out." : "";
+						var maxedout_text = (global.stat_hp >= global.stat_hpmax) ? "\n* Your HP was maxed out." : "";
 						oneShot_text("* You eat the "+choosen_item.name+"."+maxedout_text)
 						global.stat_hp = clamp(global.stat_hp, 0, global.stat_hpmax)
 						//Removing the item from the inventory if debug mode isn't on

@@ -20,14 +20,12 @@ switch(global.curTurn)
 				input = (right_key_p-left_key_p)
 				limitArray = mainButtons
 				//Wiriting main text!
-				if (!is_struct(textMainHandler.wiriter)) {textMainHandler.wiriter = new typewriter(fnt_main, font_get_size(fnt_main)+4, 15, 32, noone, maintext, 1)}
 				if (instance_exists(obj_battleBox)) { //If battle box exists, set my position on it
 					textMainHandler.posx = obj_battleBox.bbox_left+20;
 					textMainHandler.posy = obj_battleBox.bbox_top+20;
 				}
 	
-				textMainHandler.wiriter.step();
-				textMainHandler.wiriter.draw(textMainHandler.posx, textMainHandler.posy);
+				draw_special_text(textMainHandler.posx,textMainHandler.posy, font_get_size(fnt_main)+4, 15, fnt_main, maintext, 2, 2,"main", 0)
 			break;
 			
 			case baPAGES.MERCY:

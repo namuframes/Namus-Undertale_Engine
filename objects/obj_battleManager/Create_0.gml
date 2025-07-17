@@ -51,10 +51,8 @@ battletime = 0;
 
 choosen_action = "";
 
-function go_to_page(_page, _index=0)
-{
-	if (accept_key_p && global.interact_cooldown <= 0)
-	{
+function go_to_page(_page, _index=0) {
+	if (accept_key_p && global.interact_cooldown <= 0) {
 		audio_play_sound(sfx_confirm, 0, 0);
 		array_push(prevPage, page); //Adding current page in prevPage Array
 		array_push(savedMenuPos, selectedOption)
@@ -64,8 +62,7 @@ function go_to_page(_page, _index=0)
 	}
 }
 
-function get_enemie_list(_page=baPAGES.MAIN)
-{
+function get_enemie_list(_page=baPAGES.MAIN) {
 	var box = obj_battleBox
 	input = (down_key_p-up_key_p);
 	limitArray = enemie;
@@ -78,13 +75,12 @@ function get_enemie_list(_page=baPAGES.MAIN)
 			go_to_page(_page);
 		}
 		var _color = enemie[i].can_spare ? TEXTconfig.color2 : TEXTconfig.color
-		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i].name, textsize, textsize, 0, _color)	
+		draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+enemie[i].name, textsize, textsize, undefined, undefined, undefined, undefined, 0, _color)	
 	}
 	choosenEnemieIndex = array_get_index(enemie, choosenEnemie)
 }
 
-function next_turn()
-{
+function next_turn() {
 	global.curTurn = baTURNS.enemieTurnInit		
 }
 
@@ -105,7 +101,6 @@ heartpos = array_create(3)
 //Texts variable
 maintext = "* Main text 1"
 textMainHandler = {
-	wiriter:0,
 	posx :0,
 	posy :0
 };

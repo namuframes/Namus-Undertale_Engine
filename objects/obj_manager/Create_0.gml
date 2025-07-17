@@ -13,12 +13,6 @@ global.stat_exp = 0;
 global.stat_atk = 0;
 global.stat_def = 0;
 
-//Dialogue info
-global.dia_msg = array_create(0, "");
-global.dia_character = array_create(0, "");
-global.dia_question = array_create(0, "")
-global.dia_questionResult = array_create(0, "")
-global.curmsg = 0;
 global.interact_cooldown = 4;
 
 /////////////////////

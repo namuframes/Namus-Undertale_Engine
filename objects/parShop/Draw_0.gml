@@ -9,7 +9,7 @@ if (global.debug) {
 		string(prev_op)
 	]
 	for (var i = 0; i < array_length(debuginfo); i++) {
-		draw_special_text(0,0+20*i,,undefined, fnt_main,debuginfo[i], 1, 1, 0, TEXTconfig.color, 0)
+		draw_special_text(0,0+20*i,,undefined, fnt_main,debuginfo[i])
 	}
 }
 
@@ -35,14 +35,9 @@ switch(page) {
 			
 			if (curoption == i) {setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5)}
 		}
-			
-		if (!is_struct(typewriters.main)) {
-			typewriters.main = new typewriter(fnt_main, 16, 15, 20, noone, "{x}"+typewriters.main_text, undefined, 1, 1)
-		}
-		typewriters.main.step();
-		typewriters.main.draw(box1_pos[0]+15, box1_pos[1]+10);
+		draw_special_text(box1_pos[0]+15, box1_pos[1]+10, undefined, 15, fnt_main, typewriters.main_text, 1, 1, "main", 0, undefined, 160)
 		
-		typewriters.buy_text = "{wave}Então...{/wave}&O que vai ser?"
+		typewriters.buy_text = "{wave}Então...{/wave}\nO que vai ser?"
 	break;
 	
 	case "Buy":
@@ -62,34 +57,29 @@ switch(page) {
 			
 			var item = items[i][0]
 			var item_price = items[i][1]
-			draw_special_text(mypos.x, mypos.y, 14, undefined, fnt_main, string(item_price)+"G - "+item.name)
+			draw_special_text(mypos.x, mypos.y, undefined, undefined, fnt_main, string(item_price)+"G - "+item.name)
 			var item_desc = wrap_formatted_text(items[buyingInfo.chosenItem][0].shopInfo,10);
-			draw_special_text(box2_pos[0]+15, infoBox.y+10, 14, 15, fnt_main, item_desc);
+			draw_special_text(box2_pos[0]+15, infoBox.y+10, undefined, 15, fnt_main, item_desc);
 			
 			if (buyingInfo.chosenItem == i && !is_buying) {
 				setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5);
 			}
 		}
 		if (!is_buying) {
-			if (!is_struct(typewriters.buy)) {
-				typewriters.buy = new typewriter(fnt_main, 16, 15, 10, noone, "{x}"+typewriters.buy_text, undefined, 1, 1)
-			}
-
-			typewriters.buy.draw(box2_pos[0]+15, box2_pos[1]+10);
-			typewriters.buy.step();
+			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, typewriters.buy_text, 1, 1, "buy", 0, 1,35)
 		}
 
 		
 		if (is_buying) {
 			inputlimit = array_length(buyingInfo.options)-1
 			var item_price = items[buyingInfo.chosenItem][1]
-			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, 14, 15, fnt_main, wrap_formatted_text("Buy it for "+string(item_price)+"G", 10))
+			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, "Buy it for "+string(item_price)+"G", 1, 1, undefined, undefined, 0, 60)
 			for (var i = 0; i < array_length(buyingInfo.options); i++) {
 				mypos = {
 					y: box2_pos[1]+45+14*i,
 					x: box2_pos[0]+5+heartinfo.width
 				}
-				draw_special_text(mypos.x, mypos.y, 14, undefined, fnt_main, buyingInfo.options[i])
+				draw_special_text(mypos.x, mypos.y, undefined, undefined, fnt_main, buyingInfo.options[i], 1, 1)
 				
 				if (curoption == i) {
 					setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5);
@@ -106,7 +96,7 @@ switch(page) {
 				x: box1_pos[0]+5+heartinfo.width
 			}
 
-			draw_special_text(mypos.x, mypos.y, 14, undefined, fnt_main, talk[i][0])
+			draw_special_text(mypos.x, mypos.y, undefined, undefined, fnt_main, talk[i][0], 1, 1)
 			if (curoption == i) {
 				setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5);
 			}
@@ -123,7 +113,7 @@ switch(page) {
 				x: box1_pos[0]+5+heartinfo.width
 			}
 			var item = global.inventory[i]
-			draw_special_text(mypos.x, mypos.y, 14, undefined, fnt_main, item.name)
+			draw_special_text(mypos.x, mypos.y, undefined, undefined, fnt_main, item.name)
 			
 			if (curoption == i) {setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5)}
 		}

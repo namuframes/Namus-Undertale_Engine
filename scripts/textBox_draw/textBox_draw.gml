@@ -14,21 +14,15 @@ function textBox_draw(_____x,_____y, ____xscale=2,___yscale=2){
 		#region Grabbing the sprite name
 		var _a = string_count("f", portrait) > 0 ? string_pos("f", portrait) : 0
 		var portrait_checker = ""
+		
 		for(var i=1; i < string_length(portrait); i++)
 		{
 			var char = string_char_at(portrait, i);
 			if (i > _a+4)
 			{
-				if (char = "_" ||
-					char == "0" ||
-					char == "1" || char == "2" || char == "3" || char == "4" ||
-					char == "5" ||  char == "6" ||  char == "7" ||  char == "8" ||
-					char == "9")
-				{
-					char = string_char_at(portrait, --i);
-					break;
-				}
-				portrait_checker += char 
+				if ((char >= "A" || char <= "Z") || (char >= "a" || char <= "z")) {
+					portrait_checker += char
+				} else {break}
 			}
 		}
 		#endregion
@@ -64,15 +58,7 @@ function textBox_draw(_____x,_____y, ____xscale=2,___yscale=2){
 	//It looks ugly
 	if (resetPort > -1) {resetPort--;} 
 	if (resetPort == 0) {portrait = ""}
-
-	if (!is_struct(dialogue)) {dialogue = new typewriter(font, letter_width, line_space, line_end, blip_sound, text, text_speed,__xscale, __yscale)}
-	else
-	{	
-		if (dialogue.font == font) {
-			if (!global.inPause) {dialogue.step()}; //Don't write text if the game is paused
-			dialogue.draw(text_x, text_y);
-		}
-	}
+	draw_special_text(text_x,text_y, letter_width, line_space, font, text, __xscale, __y, "dialogue",text_speed,blip_sound)
 
 	draw_set_alpha(1)
 }

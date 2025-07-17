@@ -4,8 +4,9 @@ intBox[0] = (bbox_left-2)+interactBox_x;
 intBox[1] = (bbox_top-2)+interactBox_y;
 intBox[2] = (bbox_right+2)+interactBox_x2;
 intBox[3] = (bbox_bottom+2)+interactBox_y2;
-
-sprite_index = sprite;
+if (sprite = asset_sprite) {
+	sprite_index = sprite;
+}
 if (mask == asset_sprite)
 {
 	mask_index = mask;
