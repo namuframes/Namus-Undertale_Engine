@@ -176,7 +176,6 @@
     {"id":{"name":"textBox_create","path":"scripts/textBox_create/textBox_create.yy",},},
     {"id":{"name":"textBox_draw","path":"scripts/textBox_draw/textBox_draw.yy",},},
     {"id":{"name":"textBox_step","path":"scripts/textBox_step/textBox_step.yy",},},
-    {"id":{"name":"typewriter","path":"scripts/typewriter/typewriter.yy",},},
     {"id":{"name":"unused_cutsceneScripts","path":"scripts/unused_cutsceneScripts/unused_cutsceneScripts.yy",},},
     {"id":{"name":"use_blippers","path":"scripts/use_blippers/use_blippers.yy",},},
     {"id":{"name":"wrap_formatted_text","path":"scripts/wrap_formatted_text/wrap_formatted_text.yy",},},

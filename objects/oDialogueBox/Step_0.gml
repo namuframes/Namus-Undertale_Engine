@@ -69,4 +69,3 @@ if (array_length(texttodraw) > 0) {
 		text = texttodraw[curmsg]
 	}
 }
-

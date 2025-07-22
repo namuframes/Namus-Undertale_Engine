@@ -12,7 +12,6 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		writerInfo[? varname] = {
 			letter: 0,
 			time: 1,
-			dt: 0,
 			waitZ: false,
 			mod_speed: noone,
 			sound: array_create(0)
@@ -64,7 +63,6 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		}
 	
 		map.letter += (string_char_at(text,map.letter) == "\n")
-		map.dt++;
 		
 		if (map.letter < string_length(text)+1) { //If the letters that had appeared quantity is smaller than the given text, execute the code
 			if (map.time > 0) {map.time--} //Making the writer time go down
@@ -180,7 +178,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
 		}
 
-		var _coswave = mod_wave ? (cos((map.dt*6)+(charQuant))*(1.6+wave_range))*_yscale : 0
+		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*((1.5+_yscale)+wave_range) : 0
 		var let_space = [char_spacing*_xscale/2,line_spacing*_yscale]
 		var final_x = _x+(_space)+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
 		var final_y = _y+(let_space[1])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)

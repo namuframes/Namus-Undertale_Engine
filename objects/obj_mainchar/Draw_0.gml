@@ -16,5 +16,3 @@ if (global.debug)
 	draw_set_font(-1)
 	
 };
-
-//draw_rectangle(bbox_left-spd, bbox_top-spd, bbox_right+spd, bbox_bottom+spd, false)
