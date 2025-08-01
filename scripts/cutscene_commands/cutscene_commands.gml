@@ -19,7 +19,7 @@ function c_move(_x, _y,_spd=1) {
 
 function c_waitmove() {c_cmd("wait_move")}
 
-function c_var(obj,_StringVar,_value) {c_cmd("var",obj,_StringVar,_value)}
+function c_var(obj,values=[],_value) {c_cmd("var",obj,values)}
 
 function c_end() {c_cmd("end")}
 
@@ -164,7 +164,14 @@ function cutscene_commands(){
 		break;
 		
 		case "var":
-			variable_instance_set(commands_arg1[i],commands_arg2[i],commands_arg3[i])
+			var _values = commands_arg2[i]
+			if (is_array(_values[0])) {
+				for (var j = 0; j < array_length(_values); j++) {
+					variable_instance_set(commands_arg1[i],_values[j][0],_values[j][1])
+				}
+			} else {
+				variable_instance_set(commands_arg1[i],_values[0],_values[1])
+			}
 		break;
 	};
 }

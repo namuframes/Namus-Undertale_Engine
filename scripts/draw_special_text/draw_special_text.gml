@@ -37,48 +37,44 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 	var map = writerInfo[? varname]
 
 	#region Writer Code
+		if (string_char_at(text,map.letter) == "\n") {map.letter += 1}
 		while (string_char_at(text, map.letter) == "{") {
-				var commandStart = string_pos_ext("{", text, map.letter)
-				var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
-				var arg = string_split(command,",")
+			var commandStart = string_pos_ext("{", text, map.letter)
+			var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
+			map.letter += string_length(command)+2
+			var arg = string_split(command,",")
 				
-				switch(arg[0]) {
-					case "w":
-						var _r = array_length(arg) > 1 ? arg[1] : 10
-						map.time += _r;
-					break;
+			switch(arg[0]) {
+				case "w":
+					var _r = array_length(arg) > 1 ? arg[1] : 10
+					map.time += _r;
+				break;
 	
-					case "z": map.waitZ = true break;
+				case "z": map.waitZ = true break;
 			
-					case "snd":
-						var s = asset_get_index(arg[1])
-						array_push(map.sound,s);
-						if (asset_get_type(array_last(map.sound)) == asset_sound) {audio_play_sound(array_last(map.sound),0,false)};
-					break;
+				case "snd":
+					var s = asset_get_index(arg[1])
+					array_push(map.sound,s);
+					if (asset_get_type(array_last(map.sound)) == asset_sound) {audio_play_sound(array_last(map.sound),0,false)};
+				break;
 			
-					case "spd": map.mod_speed = real(arg[1]) break;
-				}
-				
-				map.letter += string_length(command)+1
+				case "spd": map.mod_speed = real(arg[1]) break;
+			}
 		}
-	
-		map.letter += (string_char_at(text,map.letter) == "\n")
 		
+		if (global.debug) {draw_text(10,180,$"{map.time}")}
 		if (map.letter < string_length(text)+1) { //If the letters that had appeared quantity is smaller than the given text, execute the code
-			if (map.time > 0) {map.time--} //Making the writer time go down
+			if (map.time > 0 && !map.waitZ) {map.time--} //Making the writer time go down
 			if (accept_key_p && map.waitZ) {map.waitZ = false}
-			
+
 			if (map.time <= 0 && !map.waitZ) {
 				map.letter++
 				var __s = map.mod_speed != noone ? map.mod_speed : write_speed
-				map.time+= __s;
+				map.time+= write_speed;
 				
 				var _c = string_char_at(text,map.letter)
 				if ((_c >= "A" && _c <= "Z") || (_c >= "a" && _c <= "z") || (_c >= "0" && _c <= "9")) {
-					if (asset_get_type(blip) == asset_sound) {
-						audio_stop_sound(blip)
-						audio_play_sound(blip,0,false)
-					}
+					audio_play_sound(blip,0,false)
 				}
 			}	
 		}
@@ -128,12 +124,17 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					case "c_defualt": draw_set_color(TEXTconfig.color) break;
 					case "c_gray": draw_set_color(c_gray) break;
 					case "c_cyan": draw_set_color(c_aqua) break;
-					case "wave": mod_wave = 1 break;
+					case "wave": 
+						mod_wave = 1 
+						wave_range = array_length(arg) > 1 ? arg[1] : 0
+					break;
+					
 					case "/wave": mod_wave = 0 break;
 					case "shake": 
 						mod_shake = 1 
 						if (array_length(arg) > 1){shake_range = arg[1]}
 					break;
+
 					case "/shake": 
 						mod_shake = 0
 						shake_range = 1;
@@ -178,7 +179,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
 		}
 
-		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*((1.5+_yscale)+wave_range) : 0
+		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*((2+_yscale)+wave_range) : 0
 		var let_space = [char_spacing*_xscale/2,line_spacing*_yscale]
 		var final_x = _x+(_space)+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
 		var final_y = _y+(let_space[1])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)
@@ -204,7 +205,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					surface_reset_target();
 				}
 				surface_set_target(_surf[1])
-
+				draw_clear_alpha(c_black, 0)
 				draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)
 
 				surface_reset_target();
