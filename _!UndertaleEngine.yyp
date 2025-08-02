@@ -124,6 +124,7 @@
     {"id":{"name":"obj_teleport_point_e","path":"objects/obj_teleport_point_e/obj_teleport_point_e.yy",},},
     {"id":{"name":"obj_transition","path":"objects/obj_transition/obj_transition.yy",},},
     {"id":{"name":"obj_warper","path":"objects/obj_warper/obj_warper.yy",},},
+    {"id":{"name":"obj_windowConfig","path":"objects/obj_windowConfig/obj_windowConfig.yy",},},
     {"id":{"name":"oDialogueBox","path":"objects/oDialogueBox/oDialogueBox.yy",},},
     {"id":{"name":"par_bullet","path":"objects/par_bullet/par_bullet.yy",},},
     {"id":{"name":"par_npc","path":"objects/par_npc/par_npc.yy",},},

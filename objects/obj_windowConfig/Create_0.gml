@@ -1,0 +1,1 @@
+w = global.windowSize.width; h = global.windowSize.height
