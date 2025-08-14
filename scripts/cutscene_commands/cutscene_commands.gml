@@ -8,9 +8,9 @@ function c_cmd(command, arg1=undefined, arg2=undefined, arg3=undefined, arg4=und
     array_push(c.commands_arg3, arg3);
     array_push(c.commands_arg4, arg4);
 	array_push(c.commands_arg5, arg5);
-	array_push(c.commands_arg6, arg5);
-	array_push(c.commands_arg7, arg5);
-	array_push(c.commands_arg8, arg5);
+	array_push(c.commands_arg6, arg6);
+	array_push(c.commands_arg7, arg7);
+	array_push(c.commands_arg8, arg8);
 }
 
 function c_move(_x, _y,_spd=1) {
@@ -41,7 +41,7 @@ function c_not_exist(_obj) {c_cmd("notExist",_obj)}
 
 function c_lerpCam(_x,_y,_finaltarget=obj_cam.target,spd=1) {c_cmd("lerp_cam",_x,_y,_finaltarget,spd)}
 function c_wait(_time) {c_cmd("wait",_time)}
-function c_tween(_object,_var,_value,_type,_speed) {c_cmd("tween",_object,_var,_value,_type,_speed)}
+function c_tween(_object,tag,_var,_value,_type,_speed) {c_cmd("tween",_object,tag,_var,_value,_type,_speed)}
 function c_instance_create(_x,_y,_depth,_object,_struct={}) {c_cmd("instance_create",_x,_y,_depth,_object,_struct)}
 function c_timer(_timer=timer+1) {c_cmd("timer",_timer)}
 
@@ -85,13 +85,15 @@ function cutscene_commands(){
 		
 		case "tween":
 			var args = (
-				string(commands_arg1[i])+"\n"+
-				string(commands_arg2[i])+"\n"+
-				string(commands_arg3[i])+"\n"+
-				string(commands_arg4[i])
+				string(commands_arg1[i])+" - 1\n"+
+				string(commands_arg2[i])+" - 2\n"+
+				string(commands_arg3[i])+" - 3\n"+
+				string(commands_arg4[i])+" - 4\n"+
+				string(commands_arg5[i])+" - 5\n"+
+				string(commands_arg6[i])+" - 6"
 			)
-			//show_debug_message(args)
-			do_tween(commands_arg1[i],commands_arg2[i],commands_arg3[i],commands_arg4[i],commands_arg5[i])
+			show_debug_message(args)
+			do_tween(commands_arg1[i],commands_arg2[i],commands_arg3[i],commands_arg4[i],commands_arg5[i],commands_arg6[i])
 		break;
 		
 		case "move":

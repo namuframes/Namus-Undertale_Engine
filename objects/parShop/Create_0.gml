@@ -1,7 +1,7 @@
 scr_inputs();
 options = ["Buy","Sell","Talk","Exit"]
 page = "main"
-set_game_song(mus_shop);
+
 items = [
 	[get_item(ITEMS.stick), 10],
 	[get_item(ITEMS.stick), 10],

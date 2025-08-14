@@ -183,7 +183,6 @@
     {"id":{"name":"sq_test_attack","path":"sequences/sq_test_attack/sq_test_attack.yy",},},
     {"id":{"name":"sh_outline","path":"shaders/sh_outline/sh_outline.yy",},},
     {"id":{"name":"mus_null","path":"sounds/mus_null/mus_null.yy",},},
-    {"id":{"name":"mus_shop","path":"sounds/mus_shop/mus_shop.yy",},},
     {"id":{"name":"mus_snowwalk","path":"sounds/mus_snowwalk/mus_snowwalk.yy",},},
     {"id":{"name":"sfx_confirm","path":"sounds/sfx_confirm/sfx_confirm.yy",},},
     {"id":{"name":"sfx_explode","path":"sounds/sfx_explode/sfx_explode.yy",},},

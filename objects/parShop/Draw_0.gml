@@ -35,7 +35,7 @@ switch(page) {
 			
 			if (curoption == i) {setheart_pos(mypos.x-heartinfo.width+5,mypos.y+5)}
 		}
-		draw_special_text(box1_pos[0]+15, box1_pos[1]+10, undefined, 15, fnt_main, typewriters.main_text, 1, 1, "main", 0, undefined, 160)
+		draw_special_text(box1_pos[0]+15, box1_pos[1]+10, undefined, 15, fnt_main, typewriters.main_text, 1, 1, "main",0,, 160)
 		
 		typewriters.buy_text = "{wave}Então...{/wave}\nO que vai ser?"
 	break;
@@ -66,14 +66,14 @@ switch(page) {
 			}
 		}
 		if (!is_buying) {
-			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, typewriters.buy_text, 1, 1, "buy", 0, 1,35)
+			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, typewriters.buy_text, 1, 1, "buy", 0,,35)
 		}
 
 		
 		if (is_buying) {
 			inputlimit = array_length(buyingInfo.options)-1
 			var item_price = items[buyingInfo.chosenItem][1]
-			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, "Buy it for "+string(item_price)+"G", 1, 1, undefined, undefined, 0, 60)
+			draw_special_text(box2_pos[0]+15, box2_pos[1]+10, undefined, 15, fnt_main, "Buy it for "+string(item_price)+"G", 1, 1,,,, 60)
 			for (var i = 0; i < array_length(buyingInfo.options); i++) {
 				mypos = {
 					y: box2_pos[1]+45+14*i,

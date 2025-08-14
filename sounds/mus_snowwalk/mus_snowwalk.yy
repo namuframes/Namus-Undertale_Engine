@@ -9,7 +9,7 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":11.762358,
+  "duration":11.762359,
   "name":"mus_snowwalk",
   "parent":{
     "name":"SFX",
