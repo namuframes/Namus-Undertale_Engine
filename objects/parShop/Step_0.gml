@@ -85,13 +85,13 @@ if (page != "Talk-Cutscene") {
 	if (global.interact_cooldown > 0) {global.interact_cooldown--}
 
 	if (accept_key_p) {
-		//audio_play_sound(sfx_confirm, 1, 0)
+		audio_play_sound(sfx_confirm, 1, 0)
 		global.interact_cooldown = 2
 	}
 
 	if ((accept_key_p || cancel_key_p) && array_length(prev_page) > 0) {
-		//writerInfo[?"main"].letter = 0;
-		//if (ds_map_exists(writerInfo, "buy")) {writerInfo[?"buy"].letter = 0};
+		writerInfo[?"main"].letter = 0;
+		if (ds_map_exists(writerInfo, "buy")) {writerInfo[?"buy"].letter = 0};
 	}
 } else {
 	if (!instance_exists(cutscene_instance)) {
