@@ -21,4 +21,4 @@ if (room != rm_battle && room != rm_shop) {
 	draw_special_text(textPos.x,textPos.y, 1.3, line_space, font, text, 2, 2, "box",0,blip_sound,line_end)
 }
 
-draw_text(textPos.x+90,textPos.y-10,$"{writerInfo[?"box"].time} - {writerInfo[?"box"].waitZ}")
+//draw_text(textPos.x+90,textPos.y-10,$"{writerInfo[?"box"].time} - {writerInfo[?"box"].waitZ}")

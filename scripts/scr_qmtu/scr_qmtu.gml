@@ -3,11 +3,10 @@
 function scr_qmtu(){
 	switch(timer) {
 		case 0:
-			create_box("EU SOU O FODINHA DO EMINEM IRMÃO, PELO AMOR DE DEUSSS TU NÃO ME CONHECE FILHA DA PUTA AWW CARAI AGR SIM, IT'S OVER FOR BETINHA.")
-		break;
-		
-		case 1:
-			instance_destroy();
+			c_dialogue(["EU SOU O FODINHA DO EMINEM IRMÃO, PELO AMOR DE DEUSSS TU NÃO ME CONHECE FILHA DA PUTA AWW CARAI AGR SIM, IT'S OVER FOR BETINHA."])
+			c_wait_dialogue()
+			c_end();
+			timer++;
 		break;
 	}
 }

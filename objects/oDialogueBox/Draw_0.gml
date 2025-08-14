@@ -7,5 +7,6 @@ if (room == rm_battle) {
 }
 
 if (room == rm_shop) {
-	draw_special_text(-10,130, letter_width, line_space, font, text, 1, 1, "box",0,blip_sound,line_end)
+	//draw_special_text(-10,130, letter_width, line_space, font, text, 1, 1, "box",0,blip_sound,line_end)
+	draw_special_text(20,150,,20,font,text,1,1,"box",0,blip_sound,line_end,0,,)
 }

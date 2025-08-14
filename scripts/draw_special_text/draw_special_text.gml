@@ -157,7 +157,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					
 					case "face":
 						var s = asset_get_index(arg[1]);
-						if (map.time <= 0 && !map.waitZ) {oDialogueBox.portrait = s;}
+						if (map.time <= 0 && !map.waitZ || map.letter >= string_length(text)) {oDialogueBox.portrait = s;}
 					break;
 				}
 				
