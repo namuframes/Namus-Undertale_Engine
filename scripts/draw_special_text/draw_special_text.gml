@@ -11,10 +11,11 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 	if (!ds_map_exists(writerInfo, varname)) {
 		writerInfo[? varname] = {
 			letter: 0,
-			time: 1,
+			time: write_speed,
 			waitZ: false,
 			mod_speed: noone,
-			sound: array_create(0)
+			sound: array_create(0),
+			can_skip: true
 		}
 	}
 	if (varname == "") {writerInfo[? varname].letter = string_length(text)}
@@ -58,7 +59,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					if (asset_get_type(array_last(map.sound)) == asset_sound) {audio_play_sound(array_last(map.sound),0,false)};
 				break;
 			
-				case "spd": map.mod_speed = real(arg[1]) break;
+				case "spd": map.mod_speed = real(arg[1]); break;
 			}
 		}
 
@@ -69,7 +70,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			if (map.time <= 0 && !map.waitZ) {
 				map.letter++
 				var __s = map.mod_speed != noone ? map.mod_speed : write_speed
-				map.time+= write_speed;
+				map.time+= __s;
 				
 				var _c = string_char_at(text,map.letter)
 				if ((_c >= "A" && _c <= "Z") || (_c >= "a" && _c <= "z") || (_c >= "0" && _c <= "9")) {
@@ -81,13 +82,11 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 	#endregion
 	
 	sprite = "";
-	var _surf = array_create(0);
-	_surf[0] = surface_create(surface_get_width(application_surface),surface_get_height(application_surface));
-	_surf[1] = surface_create(surface_get_width(application_surface),surface_get_height(application_surface));
 	
 	for (var i = 1; i < map.letter; i++) { 
 		_length = 0
-		char = string_char_at(text, i);
+		var c = string_char_at(text, i);
+		char = c
 		charMath = char_spacing
 
 		__ln = line_spacing; 
@@ -101,6 +100,16 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			sprite_space.y = 0;
 		}
 		var letWidth = (string_width(char)+charMath)*_xscale
+	
+		if (string_char_at(text,i-1) == " ") { //Breaking the line IF current letter is " "
+			j = i+1
+			while (string_char_at(text,j) != "{" && string_char_at(text,j) != " " && string_char_at(text,j) != "\n" && j <= string_length(text)) {
+				j++;
+				_length += (string_width(string_char_at(text,j))+charMath)*_xscale; //Length é o tamanho da proxima palavra
+			}
+			var __w = line_length+string_width(" ")
+			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
+		}
 	
 		#region Blipper stuff
 			if (char == "\n") {break_line()}
@@ -127,7 +136,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					case "c_cyan": draw_set_color(c_aqua) break;
 					case "wave": 
 						mod_wave = 1 
-						wave_range = array_length(arg) > 1 ? arg[1] : 0
+						wave_range = array_length(arg) > 1 ? real(arg[1]) : 0
 					break;
 					
 					case "/wave": mod_wave = 0 break;
@@ -158,78 +167,47 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					
 					case "face":
 						var s = arg_length > 0 ? asset_get_index(arg[1]) : "";
-						if (map.time <= 0 && !map.waitZ || map.letter >= string_length(text)) {oDialogueBox.portrait = s;}
+						if (map.time <= write_speed && !map.waitZ || map.letter >= string_length(text)) {oDialogueBox.portrait = s;}
+					break;
+					
+					case "x":
+						map.can_skip = false;
 					break;
 				}
 				
 				if (command == ">") {
-					if (map.time <= 0 && map.delay <= 0 && !map.waitZ) {with(oDialogueBox) {next_message()}	}
+					if (map.time <= 0 && !map.waitZ) {with(oDialogueBox) {next_message()}	}
 				}
 				
 				continue;
 			}
 		#endregion
-		
-		if (string_char_at(text,i-1) == " ") { //Breaking the line IF current letter is " "
-			j = i+1
-			while (string_char_at(text,j) != " " && string_char_at(text,j) != "{" && j <= string_length(text)) {
-				j++;
-				_length += (string_width(string_char_at(text,j))+charMath)*_xscale; //Length é o tamanho da proxima palavra
-			}
-			var __w = line_length+string_width(" ")
-			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
-		}
 
-		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*((2+_yscale)+wave_range) : 0
+		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*(1+wave_range) : 0
+		var _sinwave = mod_wave ? sin((global.time*6)-charQuant)*(1+wave_range) : 0
 		var let_space = [line_spacing*_yscale]
-		var final_x = _x+(_space)+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
+		var final_x = _x+(_space)+_sinwave+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
 		var final_y = _y+(let_space[0])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)
 
-		if (surface_exists(_surf[1])) {
-			if (sprite == "") {
-				if (_outline > 0)	{ //Drawing the outline in a specfic surface
-					surface_set_target(_surf[0])
-					draw_clear_alpha(c_black, 0)
-					for (var j = 0; j < _outline+1; j++) { //Outline
-						if (surface_exists(_surf[0])) {
-							draw_text_transformed_color(final_x+j, final_y, char, _xscale, _yscale,_angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x-j, final_y, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x, final_y-j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-			
-							draw_text_transformed_color(final_x+j, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x-j, final_y-j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x-j, final_y+j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-							draw_text_transformed_color(final_x+j, final_y-j, char, _xscale, _yscale, _angle, c_black, c_black, c_black, c_black,1);
-						}
-					}
-					surface_reset_target();
-				}
-				surface_set_target(_surf[1])
-				draw_clear_alpha(c_black, 0)
-				draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)
-
-				surface_reset_target();
-			} else {
-				var spr = asset_get_index(sprite)
-				var s_w = sprite_get_width(spr)*_xscale
-				var s_h = sprite_get_height(spr)*_yscale
+		if (sprite == "") {
+			draw_text_transformed(final_x, final_y, char, _xscale, _yscale, _angle)
+		} else {
+			var spr = asset_get_index(sprite)
+			var s_w = sprite_get_width(spr)*_xscale
+			var s_h = sprite_get_height(spr)*_yscale
 				
-				sprite_space.x += s_w
-				sprite_space.y += s_h/_yscale
-				draw_sprite_ext(spr, 0, final_x, final_y,_xscale,_yscale,0,c_white,1)	
-			}
-			
-			draw_surface(_surf[0], 0, 0)
-			draw_surface(_surf[1], 0, 0)
+			sprite_space.x += s_w
+			sprite_space.y += s_h/_yscale
+			draw_sprite_ext(spr, 0, final_x, final_y,_xscale,_yscale,0,c_white,1)	
 		}
+		
 
 		_space+=letWidth;
 		charQuant++;
 		
 
 	}
-	surface_free(_surf[0]); surface_free(_surf[1])
+
 	draw_set_color(c_white)
 	draw_set_font(-1)
 }
