@@ -35,8 +35,8 @@ switch(global.curTurn)
 	
 	case baTURNS.playerTurn:
 		with(obj_battleBox) {
-			image_xscale = lerp(image_xscale,DefaultSize[0], 0.2);
-			image_yscale = lerp(image_yscale,DefaultSize[1], 0.2);
+			image_xscale = tweenVar(image_xscale,DefaultSize[0], 1);
+			image_yscale = tweenVar(image_yscale,DefaultSize[1], 1);
 		}
 		selectedOption += input
 		if (input !=0 && selectedOption >= 0 && selectedOption <= array_length(limitArray)-1) {audio_play_sound(sfx_select, 0, false)}

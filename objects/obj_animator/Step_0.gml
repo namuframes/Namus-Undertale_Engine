@@ -1,9 +1,15 @@
-if (live_call()) {return live_result}
+
 if (initialize) { //Te amo tales, <3
 	if (values_init == undefined) {values_init = variable_instance_get(object, var_name)}
 
 	var chan = animcurve_get_channel(curve.asset,curve_type);
 	var val = animcurve_channel_evaluate(chan,curve.time);
+
+	if (creator != undefined) {
+		if (!instance_exists(creator)) {
+			instance_destroy()
+		}
+	};
 
 	if (instance_exists(object)) {
 		if (curve.time < 1) {
@@ -15,4 +21,8 @@ if (initialize) { //Te amo tales, <3
 			instance_destroy();	
 		}
 	}
+
+
 }
+	
+

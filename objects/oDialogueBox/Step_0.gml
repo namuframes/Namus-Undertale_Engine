@@ -37,9 +37,9 @@ if (array_length(texttodraw) > 0) {
 		#endregion
 		
 		switch(portName) {
-			case "asgore":
-				set_character(snd_txtasg)
-			break;
+			case "asgore": set_character(snd_txtasg) break;
+			
+			case "eiden": set_character(snd_txteiden) break;
 		}
 	} else {
 		set_character()

@@ -57,6 +57,27 @@ switch(state)
 				if (vsp < 0) {face = UP};
 			}
 		}
+		
+		// diagonal collisions
+		if (place_meeting(x+hsp, y, obj_colision_slope) && vsp = 0) {
+			if (!place_meeting(x+sign(hsp),y-1,obj_colision_slope)) {
+				y -= spd
+			} else {
+				if (!place_meeting(x-sign(hsp),y+1,obj_colision_slope)) {
+					y += spd
+				}
+			}
+		}
+
+		if (place_meeting(x, y+vsp , obj_colision_slope) && hsp = 0) {
+			if (!place_meeting(x-1,y+sign(vsp),obj_colision_slope)) {
+				x -= spd
+			} else {
+				if (!place_meeting(x+1,y-sign(vsp),obj_colision_slope)) {
+					x += spd
+				}
+			}
+		}
 
 		colision(obj_colision)	
 		do_frisk_dance();

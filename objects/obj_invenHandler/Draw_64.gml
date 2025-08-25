@@ -56,34 +56,38 @@ if (accept_key_p && global.interact_cooldown <= 0) //Pressed the accpet key
 		case "action": //In the actions menu
 			switch(actions[selectedItem]) { //What player choose to do with the item
 				case "USE":
-					if (item_type(choosen_item) != ITEMTYPES.food) //Checking if the selected item is a armor or an weapon
-					{
-						if (item_type(choosen_item) == ITEMTYPES.weapon) //Checking the current item is an weapon
+					if (is_numeric(choosen_item.effect)) {
+						if (item_type(choosen_item) != ITEMTYPES.food) //Checking if the selected item is a armor or an weapon
 						{
-							if (is_struct(global.weapon)) {
-								global.inventory[item_index] = global.weapon; //Replacing the item slot with the weapon
-							} else {array_delete(global.inventory, item_index, 1)}
-							global.weapon = choosen_item; //Wearing the selected item as an weapon
-						}
+							if (item_type(choosen_item) == ITEMTYPES.weapon) //Checking the current item is an weapon
+							{
+								if (is_struct(global.weapon)) {
+									global.inventory[item_index] = global.weapon; //Replacing the item slot with the weapon
+								} else {array_delete(global.inventory, item_index, 1)}
+								global.weapon = choosen_item; //Wearing the selected item as an weapon
+							}
 						
-						if (item_type(choosen_item) == ITEMTYPES.armor) //Checking the current item is an armor
-						{
-							if (is_struct(global.armor)) {
-								global.inventory[item_index] = global.armor; //Replacing the item slot with the armor
-							} else {array_delete(global.inventory, item_index, 1)}
-							global.armor = choosen_item; //Wearing the selected item as an armor
+							if (item_type(choosen_item) == ITEMTYPES.armor) //Checking the current item is an armor
+							{
+								if (is_struct(global.armor)) {
+									global.inventory[item_index] = global.armor; //Replacing the item slot with the armor
+								} else {array_delete(global.inventory, item_index, 1)}
+								global.armor = choosen_item; //Wearing the selected item as an armor
+							}
+							oneShot_text("* You equipped the "+choosen_item.name+".")
 						}
-						oneShot_text("* You equipped the "+choosen_item.name+".")
-					}
-					else {
-						audio_play_sound(snd_heal_c, 1, false)
-						global.stat_hp += choosen_item.effect
-						//Adding the maced out text if the HP is higher or equal to the MAX HP
-						var maxedout_text = (global.stat_hp >= global.stat_hpmax) ? "\n* Your HP was maxed out." : "";
-						oneShot_text("* You eat the "+choosen_item.name+"."+maxedout_text)
-						global.stat_hp = clamp(global.stat_hp, 0, global.stat_hpmax)
-						//Removing the item from the inventory if debug mode isn't on
-						if (!global.debug) array_delete(global.inventory, item_index, 1)
+						else {
+							audio_play_sound(snd_heal_c, 1, false)
+							global.stat_hp += choosen_item.effect
+							//Adding the maced out text if the HP is higher or equal to the MAX HP
+							var maxedout_text = (global.stat_hp >= global.stat_hpmax) ? "\n* Your HP was maxed out." : "";
+							oneShot_text("* You eat the "+choosen_item.name+"."+maxedout_text)
+							global.stat_hp = clamp(global.stat_hp, 0, global.stat_hpmax)
+							//Removing the item from the inventory if debug mode isn't on
+							if (!global.debug) array_delete(global.inventory, item_index, 1)
+						}
+					} else {
+						script_execute(choosen_item.effect)	
 					}
 				break;
 				

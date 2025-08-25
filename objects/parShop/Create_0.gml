@@ -3,11 +3,11 @@ options = ["Buy","Sell","Talk","Exit"]
 page = "main"
 
 items = [
-	[get_item(ITEMS.stick), 10],
-	[get_item(ITEMS.stick), 10],
-	[get_item(ITEMS.stick), 10],
-	[get_item(ITEMS.stick), 10],
-	[get_item(ITEMS.stick), 10]
+	[get_item(ITEMS.toyKnife), 10],
+	[get_item(ITEMS.toyKnife), 10],
+	[get_item(ITEMS.toyKnife), 10],
+	[get_item(ITEMS.toyKnife), 10],
+	[get_item(ITEMS.toyKnife), 10]
 ]
 
 talk = [

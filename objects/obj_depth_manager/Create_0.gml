@@ -1,1 +1,1 @@
-global.grid_prof = ds_grid_create(2,0);
+grid_prof = ds_grid_create(2,0);

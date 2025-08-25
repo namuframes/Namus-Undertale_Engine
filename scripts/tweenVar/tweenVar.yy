@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_diabox_script",
+  "%Name":"tweenVar",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_diabox_script",
+  "name":"tweenVar",
   "parent":{
-    "name":"CUTSCENESCRIPTS",
-    "path":"folders/Scripts/CUTSCENESCRIPTS.yy",
+    "name":"MISC",
+    "path":"folders/Scripts/MISC.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -58,7 +58,7 @@ switch(page) {
 			var item = items[i][0]
 			var item_price = items[i][1]
 			draw_special_text(mypos.x, mypos.y, undefined, undefined, fnt_main, string(item_price)+"G - "+item.name)
-			var item_desc = wrap_formatted_text(items[buyingInfo.chosenItem][0].shopInfo,10);
+			var item_desc = wrap_formatted_text(items[buyingInfo.chosenItem][0].info(),10);
 			draw_special_text(box2_pos[0]+15, infoBox.y+10, undefined, 15, fnt_main, item_desc);
 			
 			if (buyingInfo.chosenItem == i && !is_buying) {

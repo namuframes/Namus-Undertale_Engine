@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"cutscene_commands",
+  "%Name":"CUTSCENE_COMMANDS",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"cutscene_commands",
+  "name":"CUTSCENE_COMMANDS",
   "parent":{
     "name":"CUTSCENESCRIPTS",
     "path":"folders/Scripts/CUTSCENESCRIPTS.yy",

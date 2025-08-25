@@ -61,9 +61,8 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 				case "spd": map.mod_speed = real(arg[1]) break;
 			}
 		}
-		
-		if (global.debug) {draw_text(10,180,$"{map.time}")}
-		if (map.letter < string_length(text)+1) { //If the letters that had appeared quantity is smaller than the given text, execute the code
+
+		if (map.letter < string_length(text)+1) { //If the letters quantity that had appeared is smaller than the given text, execute the code
 			if (map.time > 0 && !map.waitZ) {map.time--} //Making the writer time go down
 			if (accept_key_p && map.waitZ) {map.waitZ = false}
 
@@ -89,18 +88,19 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 	for (var i = 1; i < map.letter; i++) { 
 		_length = 0
 		char = string_char_at(text, i);
+		charMath = char_spacing
 
 		__ln = line_spacing; 
-		__xs = [_xscale,char_spacing]
+		__xs = [_xscale]
 		break_line = function() {
-			_space = is_aster && char != "*" ? (string_width("* ")+__xs[1])*__xs[0] : 0
+			_space = is_aster && char != "*" ? (string_width("* ")+charMath)*__xs[0] : 0
 
 			sprite_space.x = 0;
 			var sprite_line = sprite_space.y > __ln ? (sprite_space.y)*0.035 : 0
 			_line += 1 + sprite_line;
 			sprite_space.y = 0;
 		}
-		var letWidth = (string_width(char)+char_spacing)*_xscale
+		var letWidth = (string_width(char)+charMath)*_xscale
 	
 		#region Blipper stuff
 			if (char == "\n") {break_line()}
@@ -111,6 +111,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 				var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
 				i += string_length(command)+1
 				var arg = string_split(command,",")
+				var arg_length = array_length(arg)-1
 
 				switch (arg[0])
 				{
@@ -156,7 +157,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					break;
 					
 					case "face":
-						var s = asset_get_index(arg[1]);
+						var s = arg_length > 0 ? asset_get_index(arg[1]) : "";
 						if (map.time <= 0 && !map.waitZ || map.letter >= string_length(text)) {oDialogueBox.portrait = s;}
 					break;
 				}
@@ -173,16 +174,16 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			j = i+1
 			while (string_char_at(text,j) != " " && string_char_at(text,j) != "{" && j <= string_length(text)) {
 				j++;
-				_length+=string_width(string_char_at(text,j))*_xscale; //Length é o tamanho da proxima palavra
+				_length += (string_width(string_char_at(text,j))+charMath)*_xscale; //Length é o tamanho da proxima palavra
 			}
 			var __w = line_length+string_width(" ")
 			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
 		}
 
 		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*((2+_yscale)+wave_range) : 0
-		var let_space = [char_spacing*_xscale/2,line_spacing*_yscale]
+		var let_space = [line_spacing*_yscale]
 		var final_x = _x+(_space)+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
-		var final_y = _y+(let_space[1])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)
+		var final_y = _y+(let_space[0])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)
 
 		if (surface_exists(_surf[1])) {
 			if (sprite == "") {

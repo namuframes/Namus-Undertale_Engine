@@ -4,6 +4,6 @@ if (layer_sequence_is_finished(seq))
 }
 
 with(obj_battleBox) {
-	image_xscale = lerp(image_xscale,6, 0.35);
-	image_yscale = lerp(image_yscale,6, 0.35);
+	image_xscale = tweenVar(image_xscale,6, 1);
+	image_yscale = tweenVar(image_yscale,6, 1);
 }

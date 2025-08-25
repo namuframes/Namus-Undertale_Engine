@@ -1,1 +1,1 @@
-ds_grid_destroy(global.grid_prof)
+ds_grid_destroy(grid_prof)

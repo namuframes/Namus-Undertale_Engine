@@ -19,6 +19,7 @@ function create_item(_name, _type, _effectInt, _infoText, _shopInfo="<NONE>") co
 	shopInfo = _shopInfo
 }
 
+
 function get_item(item) //Getting an especific item info
 {
 	switch(item)
@@ -37,7 +38,7 @@ function get_item(item) //Getting an especific item info
 }
 
 function add_item(item, _array=global.inventory) { //Adding the item to an array
-	array_push(_array, get_item(item));
+	array_push(_array, item);
 }
 
 function item_type(item) //Getting the item type

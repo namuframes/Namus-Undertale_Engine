@@ -1,3 +1,4 @@
+/*
 var _max = max_command;
 i = current_command
 
@@ -9,6 +10,10 @@ if (!wait_command && waiting.time <= 0) {
 	
 	if (_c != "wait") {waiting.buffer = true}
 }
-cutscene_commands();
+cutscene_commands();*/
+
+if (wait.time > -1) {wait.time--}
+
+do_action()
 
 do_movement();

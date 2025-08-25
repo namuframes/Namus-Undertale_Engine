@@ -1,8 +1,3 @@
-global.fun_value = irandom_range(0, 100);
-global.debug = false;
-debug_change_room = false;
-debug_selected_room = 0;
-
 //Player Info
 global.stat_name = "Chara";
 global.stat_hp = 15;
@@ -21,9 +16,7 @@ global.follower_quant = 1;
 
 //Misc------------------
 global.inventory = array_create(0)
-add_item(ITEMS.stick)
-add_item(ITEMS.bandage);
-add_item(ITEMS.toyKnife);
+
 global.weapon = 0;
 global.armor = 0;
 
@@ -31,6 +24,17 @@ global.armor_stat = 0;
 global.weapon_stat = 0;
 
 global.time = 0;
+
+global.fun_value = irandom_range(0, 100);
+global.debug = false;
+debug_change_room = false;
+debug_selected_room = 0;
+
+
+
+add_item(get_item(ITEMS.stick))
+add_item(get_item(ITEMS.toyKnife))
+
 
 //MODES
 enum mode
@@ -57,3 +61,5 @@ function get_room_count() {
 
     return count;
 }
+
+global.flag = array_create(1,0)

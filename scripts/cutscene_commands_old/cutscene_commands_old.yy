@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"get_textSeq",
+  "%Name":"cutscene_commands_old",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"get_textSeq",
+  "name":"cutscene_commands_old",
   "parent":{
     "name":"CUTSCENESCRIPTS",
     "path":"folders/Scripts/CUTSCENESCRIPTS.yy",

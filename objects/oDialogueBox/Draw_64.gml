@@ -14,10 +14,10 @@ if (room != rm_battle && room != rm_shop) {
 		textPos.x += _m
 		line_end = line_endDef-_m
 	};
-	
+	/*
 	if (resetPort > -1) {resetPort--;} 
 	if (resetPort == 0) {portrait = ""}
-	
+	*/
 	draw_special_text(textPos.x,textPos.y, 1.3, line_space, font, text, 2, 2, "box",0,blip_sound,line_end)
 }
 

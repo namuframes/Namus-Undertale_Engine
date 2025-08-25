@@ -1,34 +1,21 @@
 layer = layer_create(LAYERS.ui-22)
-global.nomove_cutscene=true;
 
-cutscene = 0;
+timer = 0;
 
-commands = array_create(0);
-commands_arg1 = array_create(0);
-commands_arg2 = array_create(0);
-commands_arg3 = array_create(0);
-commands_arg4 = array_create(0);
-commands_arg5 = array_create(0);
-commands_arg6 = array_create(0);
-commands_arg7 = array_create(0);
-commands_arg8 = array_create(0);
+commands = []
+cur_action = 0
 
-i = 0;
+wait = {
+	time: -1,
+}
 
-cur_actor = obj_mainchar;
-
-my_box = 0
-
-current_command = 0;
-max_command = -1;
-wait_command = false;
-waiting = {
-	time: 0,
-	buffer: true
-};
-_c = "";
-
-breakme = false;
+do_action = function() {
+	if (cur_action > array_length(commands)-1) {instance_destroy()} else {
+		var action = commands[cur_action]
+		var agrs = action.args
+		script_execute_ext(action.script,action.args,0);
+	}
+}
 
 moving_action = array_create(0);
 
@@ -50,6 +37,4 @@ do_movement = function() {
 	}	
 }
 
-cutscene_ended = false;
-
-timer = 0;
+tween_list = array_create(0)

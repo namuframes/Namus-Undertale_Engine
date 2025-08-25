@@ -4,41 +4,20 @@ intBox[0] = (bbox_left-2)+interactBox_x;
 intBox[1] = (bbox_top-2)+interactBox_y;
 intBox[2] = (bbox_right+2)+interactBox_x2;
 intBox[3] = (bbox_bottom+2)+interactBox_y2;
-if (sprite = asset_sprite) {
-	sprite_index = sprite;
-}
-if (mask == asset_sprite)
-{
+
+if (asset_get_type(mask) == asset_sprite) {
 	mask_index = mask;
 }
-var _intCol = collision_rectangle(intBox[0], intBox[1], intBox[2], intBox[3], obj_mainchar, false, false)
-if (variable_instance_exists(id, "msg"))	{
-	page = clamp(page, 0, array_length(msg)-1);
-	if (array_length(msg[page]) > 0)	{
-	
-		if (instance_exists(obj_mainchar) && obj_mainchar.state == mode.free && (obj_mainchar.face == face or face == "any"))	{
-			if (!instance_exists(oDialogueBox) && _intCol)	{
-				global.interact_cooldown--;
-				if (accept_key_p && global.interact_cooldown <= 0)
-				{
-					box_instance = create_box(msg[page])
-					if (variable_instance_exists(id, "question")) {
-						box_instance.question = question;
-					}
-					global.interact_cooldown = 4;
-					changepage = true
-				}
-			}
-		}
-	
-		if (changepage && !instance_exists(box_instance)) {
-				page++;
-				changepage = false;
-		}
-	}
-		
-}
 
+var _intCol = collision_rectangle(intBox[0], intBox[1], intBox[2], intBox[3], obj_mainchar, false, false)
+
+if (instance_exists(obj_mainchar) && obj_mainchar.state == mode.free && (obj_mainchar.face == face or face == "any"))	{
+	sprite_index = prev_sprite
+	if (_intCol){
+		event_user(0)
+		event_user(1)
+	}
+}
 
 
 if (depthWay == "Always behind") {

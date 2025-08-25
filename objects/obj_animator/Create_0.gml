@@ -11,6 +11,8 @@ curve = {
 text = 0
 curve_type = "out"
 
+creator = undefined
+
 values_init = undefined;
 
 

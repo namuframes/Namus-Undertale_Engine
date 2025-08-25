@@ -50,21 +50,14 @@ function colision(obj)
 		var aCol = collisions[i]
 		if (place_meeting(x+hsp,y,aCol))
 		{
-			var yplus = 0;
-			while (place_meeting(x+hsp,y-yplus,obj) && yplus <= abs(1*hsp)) {yplus++;}
-			if (place_meeting(x+hsp,y-yplus,obj))
+			if (place_meeting(x+hsp,y,obj))
 			{
 				while (!place_meeting(x+sign(hsp),y,obj))
 				{
 					x += sign(hsp);
 				}
 				hsp = 0;
-			} else {y-=yplus}			
-		}
-	
-		if !place_meeting(x+hsp,y+1,aCol) && vsp >= 0 && place_meeting(x+hsp,y+2+abs(hsp),aCol)
-		{
-			while(!place_meeting(x+hsp,y+1,aCol) && hsp !=0) {y += 1;}
+			}	
 		}
 	
 		if (place_meeting(x,y+vsp,aCol))

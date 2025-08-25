@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"eiden_cutscenes",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"eiden_cutscenes",
+  "parent":{
+    "name":"CuitscenesInGame",
+    "path":"folders/Scripts/CUTSCENESCRIPTS/CuitscenesInGame.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

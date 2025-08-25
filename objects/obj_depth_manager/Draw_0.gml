@@ -1,4 +1,4 @@
-var grid = global.grid_prof
+var grid = grid_prof
 var _num = instance_number(obj_depth_par);
 
 ds_grid_resize(grid,2,_num);

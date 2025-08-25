@@ -60,7 +60,6 @@ next_message = function() {
 		writerInfo[?"box"].letter = 0;
 		writerInfo[?"box"].mod_speed = noone;
 		writerInfo[?"box"].time = 0;
-		resetPort = 2;
 		
 		obj = noone
 	} else {

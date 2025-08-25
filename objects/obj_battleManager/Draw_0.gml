@@ -25,7 +25,7 @@ switch(global.curTurn)
 					textMainHandler.posy = obj_battleBox.bbox_top+20;
 				}
 	
-				draw_special_text(textMainHandler.posx,textMainHandler.posy, font_get_size(fnt_main)+4, 15, fnt_main, maintext, 2, 2,"main", 0)
+				draw_special_text(textMainHandler.posx,textMainHandler.posy,, 15, fnt_main, maintext, 2, 2,"main", 0)
 			break;
 			
 			case baPAGES.MERCY:
@@ -103,9 +103,7 @@ switch(global.curTurn)
 						myPos[0] += 230
 					}
 					
-					if (selectedOption == i) {
-						setheart_pos(myPos[0]-30, myPos[1]+15);
-					}
+					if (selectedOption == i) {setheart_pos(myPos[0]-30, myPos[1]+15)};
 					
 					draw_special_text(myPos[0], myPos[1], undefined, undefined, fnt_main, "* "+itemName, 2, 2);
 					if (global.debug) {
