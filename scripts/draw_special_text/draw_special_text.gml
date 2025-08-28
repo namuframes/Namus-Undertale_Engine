@@ -42,7 +42,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		while (string_char_at(text, map.letter) == "{") {
 			var commandStart = string_pos_ext("{", text, map.letter)
 			var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
-			map.letter += string_length(command)+2
+			map.letter += string_length(command)+1
 			var arg = string_split(command,",")
 				
 			switch(arg[0]) {
@@ -74,7 +74,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 				
 				var _c = string_char_at(text,map.letter)
 				if ((_c >= "A" && _c <= "Z") || (_c >= "a" && _c <= "z") || (_c >= "0" && _c <= "9")) {
-					audio_play_sound(blip,0,false)
+					audio_play_sound(blip,0,false,1,0,random_range(1,1.05))
 				}
 			}	
 		}
@@ -93,24 +93,24 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		__xs = [_xscale]
 		break_line = function() {
 			_space = is_aster && char != "*" ? (string_width("* ")+charMath)*__xs[0] : 0
-
 			sprite_space.x = 0;
 			var sprite_line = sprite_space.y > __ln ? (sprite_space.y)*0.035 : 0
 			_line += 1 + sprite_line;
 			sprite_space.y = 0;
+			_length = 0
 		}
 		var letWidth = (string_width(char)+charMath)*_xscale
 	
 		if (string_char_at(text,i-1) == " ") { //Breaking the line IF current letter is " "
-			j = i+1
-			while (string_char_at(text,j) != "{" && string_char_at(text,j) != " " && string_char_at(text,j) != "\n" && j <= string_length(text)) {
+			j = i
+			while (string_char_at(text,j) != " " && string_char_at(text,j) != "\n" && j <= string_length(text)) {
 				j++;
-				_length += (string_width(string_char_at(text,j))+charMath)*_xscale; //Length é o tamanho da proxima palavra
+				_length += ((string_width(string_char_at(text,j)))+charMath) //Length é o tamanho da proxima palavra
 			}
-			var __w = line_length+string_width(" ")
-			if (_space+_length > __w*(_xscale*0.9)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
+			var __w = line_length+string_width(" ")+charMath
+			if (_space+_length > __w*(_xscale*.8)) {break_line();} //Checando se a posição + tamanho da palavra é maior do que o limite de linha
 		}
-	
+
 		#region Blipper stuff
 			if (char == "\n") {break_line()}
 			if (char == "*") {is_aster = true; _space = 0;}
@@ -182,9 +182,9 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 				continue;
 			}
 		#endregion
-
-		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*(1+wave_range) : 0
-		var _sinwave = mod_wave ? sin((global.time*6)-charQuant)*(1+wave_range) : 0
+		
+		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*(2+wave_range) : 0
+		var _sinwave = mod_wave ? sin((global.time*6)-charQuant)*(2+wave_range) : 0
 		var let_space = [line_spacing*_yscale]
 		var final_x = _x+(_space)+_sinwave+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
 		var final_y = _y+(let_space[0])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)

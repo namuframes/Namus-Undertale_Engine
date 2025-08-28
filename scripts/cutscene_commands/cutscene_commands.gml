@@ -18,6 +18,35 @@ function c_custom(_function,_args=[]) {
 	})
 }
 
+function c_instance_create(x,y,depth,obj) {
+	c_cmd([x,y,depth,obj],function(x,y,depth,obj){
+		instance_create_depth(x,y,depth,obj)
+		end_action()
+	})
+}
+
+function c_wait_anim(obj) {
+	c_cmd([obj],function(obj){
+		if (obj.image_index >= obj.image_number-1) {end_action()}
+	})
+}
+
+function c_sound(soundid,priority,loops,gain=1,offset=0,pitch=1) {
+	c_cmd([soundid,priority,loops,gain,offset,pitch],
+	function(soundid,priority,loops,gain,offset,pitch) {
+		audio_play_sound(soundid,priority,loops,gain,offset,pitch)
+		end_action();
+	})
+}
+
+function c_destroy(obj) {
+	c_cmd([obj],
+	function(obj) {
+		if (instance_exists(obj)) {instance_destroy(obj)}
+		end_action()
+	})
+}
+
 function c_wait(_time) {
 	c_cmd([_time],
 	function(_time) {
@@ -47,6 +76,7 @@ function c_canMove(_bool) {
 	c_cmd([_bool],
 	function(_bool) {
 		global.nomove_cutscene = !_bool
+		if (_bool) {obj_mainchar.face = DOWN}
 		end_action();
 	})
 }
@@ -111,18 +141,13 @@ function c_wait_tween(tag,value=1) {
 	})	
 }
 	
-function c_move(obj,x,y,speed) {
-	c_cmd([obj,x,y,speed],
-		function(obj,x,y,speed) {
-			with(obj) {
-				if (!variable_instance_exists(id,"_path")) {cutscene_path = path_add();} else if (asset_get_type(cutscene_path) != asset_path) {cutscene_path = path_add();}
-				mp_linear_path(cutscene_path,x,y,speed,false)
-				
-				if (path_index != cutscene_path) {
-					path_position = 0
-					path_start(cutscene_path,speed,path_action_stop,false)
-				}
-			}
+function c_move(obj,x,y,speed,walksprites=false) {
+	c_cmd([obj,x,y,speed,walksprites],
+		function(obj,x,y,speed,walksprites) {
+			var _finalPos = {x: x,y: y};
+			var spd = speed; var varname = "movement-"+string(array_length(moving_action));
+			variable_instance_set(id, varname, {object: obj, x: _finalPos.x, y: _finalPos.y, speed: spd, auto_sprite: walksprites})
+			array_push(moving_action, variable_instance_get(id,varname))
 			end_action()
 		}
 	)
@@ -130,12 +155,16 @@ function c_move(obj,x,y,speed) {
 
 function c_wait_move(obj,_pos=1) {
 	c_cmd([obj,_pos], function(obj,_pos) {
-		if (obj.path_position >= _pos) {
-			with(obj) {
-				path_clear_points(cutscene_path)
-				cutscene_path = undefined;
+		if (instance_exists(obj)) {
+			var has = -4;
+			for(var i = 0; i < array_length(moving_action); i++) {if (struct_get(moving_action[i],"object") == obj) {has = i}}
+			if (has == -4) {end_action()} else {
+				var st = moving_action[has];
+				var st_obj = obj
+				if (point_distance(st_obj.x, st_obj.y, st.x, st.y) < st.speed) {
+					end_action()
+				}
 			}
-			end_action(); 
 		}
 	})
 }

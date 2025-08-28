@@ -38,6 +38,28 @@ switch(state)
 			{
 				if (down_key) {face = DOWN};	if (up_key) {face = UP};
 			}
+			
+			if (place_meeting(x+hsp, y, _obj)) {
+				if (!place_meeting(x+hsp,y-spd,_obj)) {
+					y -= spd
+				}
+
+				if (!place_meeting(x+hsp,y+spd,_obj)) {
+					y += spd
+				}
+
+			}
+
+			if (place_meeting(x, y+vsp, _obj)) {
+				if (!place_meeting(x+spd,y+vsp,_obj)) {
+					x += spd
+				}
+			
+				if (!place_meeting(x-spd,y+vsp,_obj)) {
+					x -= spd
+				}
+			}
+			
 		}
 		
 		if ((hsp != 0 or vsp != 0) && !spin)
@@ -57,27 +79,7 @@ switch(state)
 				if (vsp < 0) {face = UP};
 			}
 		}
-		
-		// diagonal collisions
-		if (place_meeting(x+hsp, y, obj_colision_slope) && vsp = 0) {
-			if (!place_meeting(x+sign(hsp),y-1,obj_colision_slope)) {
-				y -= spd
-			} else {
-				if (!place_meeting(x-sign(hsp),y+1,obj_colision_slope)) {
-					y += spd
-				}
-			}
-		}
 
-		if (place_meeting(x, y+vsp , obj_colision_slope) && hsp = 0) {
-			if (!place_meeting(x-1,y+sign(vsp),obj_colision_slope)) {
-				x -= spd
-			} else {
-				if (!place_meeting(x+1,y-sign(vsp),obj_colision_slope)) {
-					x += spd
-				}
-			}
-		}
 
 		colision(obj_colision)	
 		do_frisk_dance();

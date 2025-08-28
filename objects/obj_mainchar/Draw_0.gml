@@ -14,5 +14,5 @@ if (global.debug)
 		draw_text(x,y-sprite_height-(20*_tam)+(20*i),_t);
 	}
 	draw_set_font(-1)
-	
+	on_player_interactor()
 };
