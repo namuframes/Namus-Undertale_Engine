@@ -21,12 +21,12 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 	if (varname == "") {writerInfo[? varname].letter = string_length(text)}
 	_line = 0
 	_space = 0;
-	charQuant = 1;
+	wave_chars = 0;
 	is_aster = false
 	mod_wave = 0;
 	mod_shake = 0;
 	shake_range = 1;
-	wave_range = 0;
+	wave_range = 1;
 	have_sprite = false
 
 	sprite_space = {
@@ -98,6 +98,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			_line += 1 + sprite_line;
 			sprite_space.y = 0;
 			_length = 0
+			wave_chars = 0;
 		}
 		var letWidth = (string_width(char)+charMath)*_xscale
 	
@@ -112,9 +113,8 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		}
 
 		#region Blipper stuff
-			if (char == "\n") {break_line()}
+			if (char == "\n") {break_line();}
 			if (char == "*") {is_aster = true; _space = 0;}
-		
 			if (char == "{")	{
 				var commandStart = string_pos_ext("{", text, i)
 				var command = string_grabUntil_ext(text, "}", commandStart, 1, 0)
@@ -135,11 +135,11 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 					case "c_gray": draw_set_color(c_gray) break;
 					case "c_cyan": draw_set_color(c_aqua) break;
 					case "wave": 
-						mod_wave = 1 
-						wave_range = array_length(arg) > 1 ? real(arg[1]) : 0
+						mod_wave = true
+						wave_range = array_length(arg) > 1 ? real(arg[1]) : 1
 					break;
 					
-					case "/wave": mod_wave = 0 break;
+					case "/wave": mod_wave = 1 break;
 					case "shake": 
 						mod_shake = 1 
 						if (array_length(arg) > 1){shake_range = arg[1]}
@@ -183,10 +183,15 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 			}
 		#endregion
 		
-		var _coswave = mod_wave ? cos((global.time*6)-charQuant)*(2+wave_range) : 0
-		var _sinwave = mod_wave ? sin((global.time*6)-charQuant)*(2+wave_range) : 0
+		var wave_math = {
+			in: (global.time*6)-wave_chars,
+			out: (wave_range)
+		}
+		
+		var _coswave = mod_wave ? cos(wave_math.in)*wave_math.out : 0
+		var _sinwave = mod_wave ? sin(wave_math.in)*wave_math.out : 0
 		var let_space = [line_spacing*_yscale]
-		var final_x = _x+(_space)+_sinwave+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
+		var final_x = _x+(_space)-_sinwave+(random_range(-shake_range, shake_range)*mod_shake)+sprite_space.x
 		var final_y = _y+(let_space[0])*_line+_coswave+(random_range(-shake_range, shake_range)*mod_shake)
 
 		if (sprite == "") {
@@ -203,7 +208,7 @@ blip=noone, line_length=infinity, _angle=0, color=TEXTconfig.color, _outline=2)
 		
 
 		_space+=letWidth;
-		charQuant++;
+		wave_chars++;
 		
 
 	}
